@@ -12,7 +12,7 @@ There should be whitespace between paragraphs. We recommend including a README, 
 
 # DistroKid Profile
 
-<iframe src="hyperfollow.com/timelessdroid" width="100%" height="500px"></iframe>
+<iframe src="https://astrodroids.blogspot.com" width="100%" height="500px"></iframe>
 
 ## Header 2
 
