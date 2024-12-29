@@ -4,7 +4,7 @@ layout: default
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
-[@astrodroids blog](https://www.astrodroids.fun).
+[@astrodroids blog](./astrodroids.fun).
 
 There should be whitespace between paragraphs.
 
