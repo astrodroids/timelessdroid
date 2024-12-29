@@ -12,6 +12,8 @@ There should be whitespace between paragraphs. We recommend including a README, 
 
 # DistroKid Profile
 
+https://youtu.be/KtyNvWKp0wk?si=gF4mM7cPwWgXftCc
+
 <iframe src="https://astrodroids.blogspot.com" width="100%" height="500px"></iframe>
 
 ## Header 2
