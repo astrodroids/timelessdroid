@@ -36,17 +36,15 @@ _<center>Put this track everwhere. 🤖🍕</center>_
 
 * * *
 
-### Download Timeless Droid - Fatal Flux
+### <center>Timeless Droid - Fatal Flux</center>
 
-<dl>
+<dl align="center">
 <dt>Name</dt>
 <dd>Timeless Droid - Fatal Flux</dd>
 <dt>Released</dt>
 <dd>2022</dd>
 </dl>
 
-[@astrodroids](https://astrodroids.fun)
-
-[Timeless Droid's Profile](https://hyperfollow.com/timelessdroid)
+|:---[Timeless Droid's Profile](https://hyperfollow.com/timelessdroid)---:|
 
 
