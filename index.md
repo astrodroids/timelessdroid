@@ -6,7 +6,7 @@ layout: default
 
 _Download the MP3 below and put it in your YouTube videos. Then your videos will buy pizza for hungry people too._ 
 
-[@astrodroids](https://astrodroids.blogspot.com) blog.
+[Fatal Flux](https://timelessdroid.com/FatalFluxLossless.m4a) Apple Lossless MPEG-4
  
 
 Put this MP3 everwhere. 🤖🍕
@@ -33,7 +33,7 @@ Put this MP3 everwhere. 🤖🍕
 <dt>Released</dt>
 <dd>2022</dd>
 <dt>Apple Lossless MPEG-4</dt>
-[Fatal Flux](https://timelessdroid.com/FatalFluxLossless.m4a)
+
 <dt>Color</dt>
 <dd>Orange</dd>
 </dl>
