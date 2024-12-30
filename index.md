@@ -2,7 +2,7 @@
 layout: default
 ---
 
-**Playing Fatal Flux on YouTube, Apple Music or Spotify feeds hungry people pizza.**
+
 
 _Download the MP3 below and put it in your YouTube videos. Then your videos will buy pizza for hungry people too._ 
 
@@ -21,46 +21,9 @@ Put this MP3 everwhere. 🤖🍕
 >
 > Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid.
 
-### Header 3
-
-<script>
-fetch('https://api.rss2json.com/v1/api.json?rss_url=astrodroids.blogspot.com/feeds/posts/default')
-    .then(response => response.json())
-    .then(data => {
-        let html = '';
-        data.items.forEach(item => {
-            html += `<h3>${item.title}</h3>`;
-            html += `<p>${item.content}</p>`;
-        });
-        document.getElementById('blog-feed').innerHTML = html;
-    });
-</script>
-
-<div id="blog-feed"></div>
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
+### **Playing Fatal Flux on YouTube, Apple Music or Spotify feeds hungry people pizza.**
 
 * * *
-
 
 ### Definition lists can be used with HTML syntax.
 
