@@ -41,10 +41,14 @@ _<center>Put this track everwhere. 🤖🍕</center>_
 <dl align="center">
 <dt>Name</dt>
 <dd>Timeless Droid - Fatal Flux</dd>
-<dt>Released</dt>
-<dd>2022</dd>
 </dl>
 
-|:---[Timeless Droid's Profile](https://hyperfollow.com/timelessdroid)---:|
+|DistroKid Official Track Information|
+|:---:|
+|[Timeless Droid's Profile](https://hyperfollow.com/timelessdroid/fatal-flux)|
+
+|DistroKid Official Artist Profile|
+|:---:|
+|[Timeless Droid's Profile](https://hyperfollow.com/timelessdroid)|
 
 
