@@ -40,8 +40,8 @@ layout: default
 <dt>Released</dt>
 <dd>2022</dd>
 <dt>@astrodroids</dt>
-<dd>https://astrodroids.fun</dd>
+<dd>[@astrodroids](https://astrodroids.fun)</dd>
 <dt>DistroKid Hyperfollow</dt>
-<dd>https://hyperfollow.com/timelessdroid</dd>
+<dd>[Timeless Droid,s Profile](https://hyperfollow.com/timelessdroid)</dd>
 </dl>
 
