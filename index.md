@@ -17,9 +17,9 @@ There should be whitespace between paragraphs. We recommend including a README, 
 
 ## Header 2
 
-> This is a blockquote following a header.
 >
-> Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid. >
+> Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid.
+>
 
 ### Header 3
 
