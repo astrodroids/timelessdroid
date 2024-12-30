@@ -45,7 +45,7 @@ _<center>Put this track everwhere. 🤖🍕</center>_
 
 |DistroKid Official Track Information|
 |:---:|
-|[Timeless Droid's Profile](https://hyperfollow.com/timelessdroid/fatal-flux)|
+|[Timeless Droid - Fatal Flux](https://hyperfollow.com/timelessdroid/fatal-flux)|
 
 |DistroKid Official Artist Profile|
 |:---:|
