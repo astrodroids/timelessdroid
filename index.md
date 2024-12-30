@@ -2,7 +2,9 @@
 layout: default
 ---
 
-**Playing Fatal Flux on YouTube, Apple Music or Spotify feeds hungry people pizza.**, _download it below and put it in your YouTube videos. Then your videos will buy pizza for hungry people too._ 
+**Playing Fatal Flux on YouTube, Apple Music or Spotify feeds hungry people pizza.**
+
+_Download the MP3 below and put it in your YouTube videos. Then your videos will buy pizza for hungry people too._ 
 
 [@astrodroids](https://astrodroids.blogspot.com) blog.
 
