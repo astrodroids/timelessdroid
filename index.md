@@ -12,7 +12,7 @@ There should be whitespace between paragraphs. We recommend including a README, 
 
 # DistroKid Profile
 
-<iframe src="https://blogger.googleusercontent.com/img/a/AVvXsEjvdFVeyyOoiFtMbrm9XLAsWlewczNH58MYQ5TTGcVXkxEL2vLSURBp1JxcL15S4HvtO1Yv3asOhOwiu8U_hknLev_ChK2JogD9LATiXpIHVC8cD6rPRZp6xFiaTCSOmJYuxTJWo3hKB25etpz1-_M5HgzTcxQUc86AnT1xAUwDkheK5Kl7Kgoh8ZoW3kBg=s500" align="center" width="500px" height="500px"></iframe>
+<center><iframe src="https://blogger.googleusercontent.com/img/a/AVvXsEjvdFVeyyOoiFtMbrm9XLAsWlewczNH58MYQ5TTGcVXkxEL2vLSURBp1JxcL15S4HvtO1Yv3asOhOwiu8U_hknLev_ChK2JogD9LATiXpIHVC8cD6rPRZp6xFiaTCSOmJYuxTJWo3hKB25etpz1-_M5HgzTcxQUc86AnT1xAUwDkheK5Kl7Kgoh8ZoW3kBg=s500" align="center" width="500px" height="500px"></iframe></center>
 
 ## Header 2
 
