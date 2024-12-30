@@ -15,13 +15,13 @@ Put this MP3 everwhere. 🤖🍕
 
 <center><iframe src="https://blogger.googleusercontent.com/img/a/AVvXsEjvdFVeyyOoiFtMbrm9XLAsWlewczNH58MYQ5TTGcVXkxEL2vLSURBp1JxcL15S4HvtO1Yv3asOhOwiu8U_hknLev_ChK2JogD9LATiXpIHVC8cD6rPRZp6xFiaTCSOmJYuxTJWo3hKB25etpz1-_M5HgzTcxQUc86AnT1xAUwDkheK5Kl7Kgoh8ZoW3kBg=s500" align="center" width="500px" height="500px"></iframe></center>
 
-## 100% Buys Pizza For Hungry People!
+## <center>100% Buys Pizza For Hungry People!</center>
 
 >
 >
 > Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid.
 
-### **Playing Fatal Flux on YouTube, Apple Music or Spotify feeds hungry people pizza.**
+### Playing Fatal Flux on YouTube, Apple Music or Spotify feeds hungry people pizza.
 
 * * *
 
