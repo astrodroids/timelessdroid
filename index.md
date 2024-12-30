@@ -39,9 +39,10 @@ layout: default
 <dd>Timeless Droid - Fatal Flux</dd>
 <dt>Released</dt>
 <dd>2022</dd>
-<dt>@astrodroids</dt>
-<dd>[@astrodroids](https://astrodroids.fun)</dd>
-<dt>DistroKid Hyperfollow</dt>
-<dd>[Timeless Droid,s Profile](https://hyperfollow.com/timelessdroid)</dd>
 </dl>
+
+[@astrodroids](https://astrodroids.fun)
+
+[Timeless Droid,s Profile](https://hyperfollow.com/timelessdroid)
+
 
