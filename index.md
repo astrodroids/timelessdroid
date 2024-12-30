@@ -22,6 +22,21 @@ There should be whitespace between paragraphs. We recommend including a README, 
 
 ### Header 3
 
+<script>
+fetch('https://api.rss2json.com/v1/api.json?rss_url=astrodroids.blogspot.com/feeds/posts/default')
+    .then(response => response.json())
+    .then(data => {
+        let html = '';
+        data.items.forEach(item => {
+            html += `<h3>${item.title}</h3>`;
+            html += `<p>${item.content}</p>`;
+        });
+        document.getElementById('blog-feed').innerHTML = html;
+    });
+</script>
+
+<div id="blog-feed"></div>
+
 ```js
 // Javascript code with syntax highlighting.
 var fun = function lang(l) {
