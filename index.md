@@ -26,9 +26,9 @@ layout: default
 
 >
 >
-> Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid.
+> 🤖 Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid.
 
-### Playing Fatal Flux on YouTube, Apple Music or Spotify feeds hungry people pizza.
+### <center>Playing Fatal Flux on YouTube, Apple Music or Spotify feeds hungry people pizza.</center>
 
 * * *
 
@@ -39,16 +39,9 @@ layout: default
 <dd>Timeless Droid - Fatal Flux</dd>
 <dt>Released</dt>
 <dd>2022</dd>
-<dt>Apple Lossless MPEG-4</dt>
-
-<dt>Color</dt>
-<dd>Orange</dd>
+<dt>@astrodroids</dt>
+<dd>https://astrodroids.fun</dd>
+<dt>DistroKid Hyperfollow</dt>
+<dd>https://hyperfollow.com/timelessdroid</dd>
 </dl>
 
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
