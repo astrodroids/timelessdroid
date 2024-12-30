@@ -43,6 +43,6 @@ layout: default
 
 [@astrodroids](https://astrodroids.fun)
 
-[Timeless Droid,s Profile](https://hyperfollow.com/timelessdroid)
+[Timeless Droid's Profile](https://hyperfollow.com/timelessdroid)
 
 
