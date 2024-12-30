@@ -6,9 +6,9 @@ layout: default
 
 **<center>Download the Fatal Flux single below and put it in your YouTube videos. Then your videos will buy pizza for hungry people.</center>**
 
-[Timeless Droid - Fatal Flux](https://timelessdroid.com/FatalFlux.wav) Wavwform
+1. [Timeless Droid - Fatal Flux](https://timelessdroid.com/FatalFlux.wav) Waveform
 
-[Timeless Droid - Fatal Flux](https://timelessdroid.com/FatalFluxLossless.m4a) Apple Lossless MPEG-4
+2. [Timeless Droid - Fatal Flux](https://timelessdroid.com/FatalFluxLossless.m4a) Apple Lossless MPEG-4
  
 
 <center>Put this track everwhere. 🤖🍕</center>
