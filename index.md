@@ -32,8 +32,8 @@ Put this MP3 everwhere. 🤖🍕
 <dd>Timeless Droid - Fatal Flux</dd>
 <dt>Released</dt>
 <dd>2022</dd>
-<dt>MP4</dt>
-<dd>[Fatal Flux](https://timelessdroid.com/Fatal Flux Lossless.m4a)</dd>
+<dt>Apple Lossless MPEG-4</dt>
+<dd>[Fatal Flux](https://timelessdroid.com/FatalFluxLossless.m4a)</dd>
 <dt>Color</dt>
 <dd>Orange</dd>
 </dl>
