@@ -7,8 +7,7 @@ layout: default
 _Download the MP3 below and put it in your YouTube videos. Then your videos will buy pizza for hungry people too._ 
 
 [@astrodroids](https://astrodroids.blogspot.com) blog.
-
-Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid. 
+ 
 
 There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
 
@@ -20,7 +19,7 @@ There should be whitespace between paragraphs. We recommend including a README, 
 
 > This is a blockquote following a header.
 >
-> When something is important enough, you do it even if the odds are not in your favor.
+> Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid. >
 
 ### Header 3
 
