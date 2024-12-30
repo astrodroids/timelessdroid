@@ -33,7 +33,7 @@ Put this MP3 everwhere. 🤖🍕
 <dt>Released</dt>
 <dd>2022</dd>
 <dt>MP4</dt>
-<dd>[Fatal Flux](./Fatal Flux Lossless.m4a)</dd>
+<dd>[Fatal Flux](https://timelessdroid.com/Fatal Flux Lossless.m4a)</dd>
 <dt>Color</dt>
 <dd>Orange</dd>
 </dl>
