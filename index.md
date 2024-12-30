@@ -36,12 +36,7 @@ _<center>Put this track everwhere. 🤖🍕</center>_
 
 * * *
 
-### <center>Timeless Droid - Fatal Flux</center>
-
-<dl align="center">
-<dt>Name</dt>
-<dd>Timeless Droid - Fatal Flux</dd>
-</dl>
+### <center>Official DistroKid</center>
 
 |DistroKid Official Track Information|
 |:---:|
