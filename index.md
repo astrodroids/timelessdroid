@@ -4,7 +4,7 @@ layout: default
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
-[@astrodroids blog](https://astrodroids.blogspot.com).
+[@astrodroids](https://astrodroids.blogspot.com)blog.
 
 There should be whitespace between paragraphs.
 
@@ -12,7 +12,7 @@ There should be whitespace between paragraphs. We recommend including a README, 
 
 # DistroKid Profile
 
-<iframe src="https://youtu.be/KtyNvWKp0wk?si=TjtHnuX1OIIxfVkp" width="100%" height="500px"></iframe>
+<iframe src="https://blogger.googleusercontent.com/img/a/AVvXsEjvdFVeyyOoiFtMbrm9XLAsWlewczNH58MYQ5TTGcVXkxEL2vLSURBp1JxcL15S4HvtO1Yv3asOhOwiu8U_hknLev_ChK2JogD9LATiXpIHVC8cD6rPRZp6xFiaTCSOmJYuxTJWo3hKB25etpz1-_M5HgzTcxQUc86AnT1xAUwDkheK5Kl7Kgoh8ZoW3kBg=s145" width="100%" height="500px"></iframe>
 
 ## Header 2
 
