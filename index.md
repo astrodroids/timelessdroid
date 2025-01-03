@@ -46,4 +46,21 @@ _<center>🤖 Put this track everwhere.</center>_
 |:---:|
 |[Timeless Droid's Profile](https://hyperfollow.com/timelessdroid)|
 
+<script src="https://unpkg.com/rss-parser/dist/rss-parser.min.js"></script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const RSSParser = new RSSParser();
+    const feed = await RSSParser.parseURL('https://astrodroids.blogspot.com/feeds/posts/default');
+
+    let html = '';
+    feed.items.forEach(item => {
+      html += `<h3><a href="${item.link}">${item.title}</a></h3>`;
+      html += `<p>${item.contentSnippet}</p>`;
+    });
+
+    document.getElementById('rss-feed').innerHTML = html;
+  });
+</script>
+
+<div id="rss-feed"></div>
