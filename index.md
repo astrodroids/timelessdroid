@@ -28,10 +28,6 @@ _<center>🤖 Put this track everwhere.</center>_
 
 ***
 
->
->
-> 🤖 Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid.
-
 ### <center>Timeless Droid - Fatal Flux (Official Video)</center>
 
 <center>Playing Fatal Flux on YouTube, Apple Music or Spotify feeds hungry people pizza.</center>
@@ -47,6 +43,10 @@ _<center>🤖 Put this track everwhere.</center>_
 |DistroKid Official Track Information|
 |:---:|
 |[Timeless Droid - Fatal Flux](https://hyperfollow.com/timelessdroid/fatal-flux)|
+
+>
+>
+> 🤖 Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid.
 
 ***
 
