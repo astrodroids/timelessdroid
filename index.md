@@ -46,23 +46,4 @@ _<center>🤖 Put this track everwhere.</center>_
 |:---:|
 |[Timeless Droid's Profile](https://hyperfollow.com/timelessdroid)|
 
-<iframe align="center" width="560" height="315" src="https://www.youtube.com/embed/KtyNvWKp0wk?si=h-ccoV_d4BY4k2Cn" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<script src="https://unpkg.com/rss-parser/dist/rss-parser.min.js"></script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', async () => {
-    const RSSParser = new RSSParser();
-    const feed = await RSSParser.parseURL('https://astrodroids.blogspot.com/feeds/posts/default');
-
-    let html = '';
-    feed.items.forEach(item => {
-      html += `<h3><a href="${item.link}">${item.title}</a></h3>`;
-      html += `<p>${item.contentSnippet}</p>`;
-    });
-
-    document.getElementById('rss-feed').innerHTML = html;
-  });
-</script>
-
-<div align="center" id="rss-feed"></div>
+<center><iframe align="center" width="560" height="315" src="https://www.youtube.com/embed/KtyNvWKp0wk?si=h-ccoV_d4BY4k2Cn" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
