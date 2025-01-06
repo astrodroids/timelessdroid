@@ -16,7 +16,8 @@ _<center>🤖 Put this track everwhere.</center>_
 
 |Final Waveform|
 |:------:|
-|[Timeless Droid - Fatal Flux](https://timelessdroid.com/FatalFlux(Final).wav)|
+
+<center><a href="https://timelessdroid.com/FatalFlux(Final).wav">Timeless Droid - Fatal Flux</a></center>
 
 
 |Apple Lossless MP4|
