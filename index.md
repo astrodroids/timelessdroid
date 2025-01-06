@@ -14,19 +14,18 @@ _<center>🤖 Put this track everwhere.</center>_
 
 **<center>Download the Fatal Flux single below and put it in your YouTube videos. Then your videos will buy pizza for hungry people.</center>**
 
-|Final Waveform|
-|:------:|
+## <center>Final Waveform</center>
 
 <center><a href="https://timelessdroid.com/FatalFlux(Final).wav">Timeless Droid - Fatal Flux</a></center>
 
 
-|Apple Lossless MP4|
-|:-------------------:|
-|[Timeless Droid - Fatal Flux](https://timelessdroid.com/FatalFluxLossless.m4a)|
+## <center>Apple Lossless MP4</center>
 
-|Original MP3|
-|:-------------------:|
-|[Timeless Droid - Fatal Flux](https://timelessdroid.com/FatalFlux(Original).mp3)|
+<center><a href="https://timelessdroid.com/FatalFluxLossless.m4a">Timeless Droid - Fatal Flux</a></center>
+
+## <center>Original MP3</center>
+
+<center><a href="https://timelessdroid.com/FatalFlux(Original).mp3">Timeless Droid - Fatal Flux</a></center>
 
 <br>
 
