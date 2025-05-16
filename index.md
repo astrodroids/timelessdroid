@@ -2,72 +2,93 @@
 layout: default
 ---
 
-# <center>Timeless Droid - Fatal Flux (Single)</center>
+# ⚡ Timeless Droid – *Fatal Flux* ⚡
 
-<center><iframe src="https://blogger.googleusercontent.com/img/a/AVvXsEjvdFVeyyOoiFtMbrm9XLAsWlewczNH58MYQ5TTGcVXkxEL2vLSURBp1JxcL15S4HvtO1Yv3asOhOwiu8U_hknLev_ChK2JogD9LATiXpIHVC8cD6rPRZp6xFiaTCSOmJYuxTJWo3hKB25etpz1-_M5HgzTcxQUc86AnT1xAUwDkheK5Kl7Kgoh8ZoW3kBg=s500" align="center" width="500px" height="500px"></iframe></center>
+<center>
+  <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjvdFVeyyOoiFtMbrm9XLAsWlewczNH58MYQ5TTGcVXkxEL2vLSURBp1JxcL15S4HvtO1Yv3asOhOwiu8U_hknLev_ChK2JogD9LATiXpIHVC8cD6rPRZp6xFiaTCSOmJYuxTJWo3hKB25etpz1-_M5HgzTcxQUc86AnT1xAUwDkheK5Kl7Kgoh8ZoW3kBg=s500"
+       alt="Fatal Flux single cover"
+       width="500" height="500"
+       style="border:2px solid #0ff;border-radius:8px;box-shadow:0 0 8px #0ff">
+</center>
 
-_<center>🤖 Put this track everwhere.</center>_
+<p align="center"><em>🤖 Put this track everywhere.</em></p>
 
-|DistroKid Official Track Information|
-|:---:|
-|[Timeless Droid - Fatal Flux](https://hyperfollow.com/timelessdroid/fatal-flux)|
+Timeless Droid proudly presents **“Fatal Flux.”**  
+Every stream or download converts into pizza slices for people in need, thanks to our Slice Out Hunger partnership. Crank it, share it, and make a difference!
 
-<center><video width="600" controls>
-  <source src="https://timelessdroid.com/yoda-fatal-flux-1646005307.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video></center>
+---
 
-**<center>Download the Fatal Flux single below and put it in your YouTube videos. Then your videos will buy pizza for hungry people.</center>**
+## 🎧 Listen & Download
 
-## <center>Final Waveform</center>
+* **All platforms:** [DistroKid Hyperfollow](https://hyperfollow.com/timelessdroid/fatal-flux)  
+* **Direct hi‑fi downloads:**
 
-<center><a href="https://timelessdroid.com/FatalFlux(Final).wav">Timeless Droid - Fatal Flux</a></center>
+  | Format | Link |
+  |---|---|
+  | WAV (final master) | [FatalFlux (Final).wav](https://timelessdroid.com/FatalFlux(Final).wav) |
+  | Apple Lossless | [FatalFluxLossless.m4a](https://timelessdroid.com/FatalFluxLossless.m4a) |
+  | MP3 (original) | [FatalFlux (Original).mp3](https://timelessdroid.com/FatalFlux(Original).mp3) |
 
+> **Permission granted** – use “Fatal Flux” in your own videos or streams. Your plays still feed people. 🍕✨
 
-## <center>Apple Lossless MP4</center>
+---
 
-<center><a href="https://timelessdroid.com/FatalFluxLossless.m4a">Timeless Droid - Fatal Flux</a></center>
+## 📺 Official Video
 
-## <center>Original MP3</center>
+<center>
+<iframe width="560" height="315"
+        src="https://www.youtube.com/embed/bRp4bicwrGI?si=ec3IsNj0BPyy-x68"
+        frameborder="0" allowfullscreen
+        style="border:2px solid #09f;border-radius:4px"></iframe>
+</center>
 
-<center><a href="https://timelessdroid.com/FatalFlux(Original).mp3">Timeless Droid - Fatal Flux</a></center>
+---
 
-<br>
+## 🍕 100 % of Royalties → Slice Out Hunger
 
-***
+Every penny from *Fatal Flux* streams goes straight to Slice Out Hunger via DistroKid’s Artists For Change.
 
-### <center>Timeless Droid - Fatal Flux (Official Video)</center>
+<center>
+<iframe width="560" height="315"
+        src="https://www.youtube.com/embed/wvNCNrhcB0g?si=dBBL1i8frw5JiaHD"
+        frameborder="0" allowfullscreen
+        style="border:2px solid #fa0;border-radius:4px"></iframe>
+</center>
 
-<center><iframe align="center" width="560" height="315" src="https://www.youtube.com/embed/bRp4bicwrGI?si=ec3IsNj0BPyy-x68" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+---
 
-<center>Playing Fatal Flux on YouTube, Apple Music or Spotify feeds hungry people pizza.</center>
+## 🤖 Bonus Track: “Timeless Droid – Written by ChatGPT 4”
 
-<br>
+AI‑human collab in full force. Enjoy the experiment:
 
-***
+<center>
+<iframe width="560" height="315"
+        src="https://www.youtube.com/embed/KtyNvWKp0wk?si=h-ccoV_d4BY4k2Cn"
+        frameborder="0" allowfullscreen
+        style="border:2px solid #f0f;border-radius:4px"></iframe>
+</center>
 
-## <center>100% Buys Pizza For Hungry People!</center>
+---
 
-<center><iframe align="center" width="560" height="315" src="https://www.youtube.com/embed/wvNCNrhcB0g?si=dBBL1i8frw5JiaHD" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+### Styling tips for full retro‑futuristic vibes
 
->
->
-> 🤖 Timeless Droid donates all royalties to Slice Out Hunger through Artists For Change and DistroKid.
+```css
+/* Add to your main stylesheet */
+body {
+  background: #000018 url(/assets/img/starfield.gif) repeat;
+  color: #e0e0ff;
+  font-family: "Orbitron", "Space Mono", monospace;
+}
 
-<br>
+h1, h2, h3 {
+  text-shadow: 0 0 8px #0ff;
+  color: #0ff;
+}
 
-***
+a       { color:#f0f; }
+a:hover { color:#ff0; }
 
-#### <center>Timeless Droid - Written by ChatGPT 4</center>
+img, iframe, video {
+  box-shadow: 0 0 8px #0ff;
+}
 
-<center><iframe align="center" width="560" height="315" src="https://www.youtube.com/embed/KtyNvWKp0wk?si=h-ccoV_d4BY4k2Cn" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-
-<br>
-
-***
-
-<br>
-
-|DistroKid Official Artist Profile|
-|:---:|
-|[Timeless Droid's Profile](https://hyperfollow.com/timelessdroid)|
