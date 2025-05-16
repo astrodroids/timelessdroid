@@ -67,28 +67,3 @@ AI‑human collab in full force. Enjoy the experiment:
         frameborder="0" allowfullscreen
         style="border:2px solid #f0f;border-radius:4px"></iframe>
 </center>
-
----
-
-### Styling tips for full retro‑futuristic vibes
-
-```css
-/* Add to your main stylesheet */
-body {
-  background: #000018 url(/assets/img/starfield.gif) repeat;
-  color: #e0e0ff;
-  font-family: "Orbitron", "Space Mono", monospace;
-}
-
-h1, h2, h3 {
-  text-shadow: 0 0 8px #0ff;
-  color: #0ff;
-}
-
-a       { color:#f0f; }
-a:hover { color:#ff0; }
-
-img, iframe, video {
-  box-shadow: 0 0 8px #0ff;
-}
-
