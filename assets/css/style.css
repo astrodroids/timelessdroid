@@ -1,1 +1,46 @@
-
+.nav-menu {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex; 
+  justify-content: center;
+  background: rgba(0,0,0,0.85);
+}
+.nav-menu li { margin: 0 1rem; }
+.nav-menu a {
+  color: #0ff;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif; /* using the fancy font for nav */
+  font-weight: 700;
+  padding: 0.5rem;
+  display: block;
+}
+.nav-menu a:hover {
+  text-shadow: 0 0 5px #0ff;
+}
+.music-highlight { 
+  display: flex; 
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+.music-highlight img { 
+  max-width: 200px; 
+  border: 2px solid #0ff; 
+  border-radius: 8px; 
+  box-shadow: 0 0 8px #0ff; 
+}
+.music-info p { 
+  line-height: 1.6;
+}
+.download-link {
+  color: #ffa500; /* an accent color, e.g. orange for the download link to stand out */
+  font-weight: bold;
+  text-decoration: none;
+}
+.download-link:hover { text-shadow: 0 0 5px #ffa500; }
+.video-container iframe {
+  max-width: 100%;
+  border: 2px solid #09f;
+  border-radius: 4px;
+}
