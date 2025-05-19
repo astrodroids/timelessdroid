@@ -54,7 +54,7 @@ header {
 /* Hero Section */
 #hero {
   /* Background image covering the hero section */
-  background: url("../img/hero_bg.png") no-repeat center center;
+  background: url("../img/hero_bg.jpg") no-repeat center center;
   background-size: cover;
   position: relative;
   text-align: center;
