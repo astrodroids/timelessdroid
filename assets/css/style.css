@@ -121,6 +121,16 @@ header {
   background: #ffc045;
   transform: scale(1.04);
 }
+#hero {
+  /* ... existing styles ... */
+  padding-top: 72px;   /* Adjust as needed to fit under the nav */
+}
+@media (max-width: 700px) {
+  #hero {
+    padding-top: 50px;
+  }
+}
+
 
 /* --- Content Sections --- */
 .content-section {
