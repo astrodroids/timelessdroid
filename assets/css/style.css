@@ -11,16 +11,16 @@ html, body {
 
 /* Headings and text elements */
 h1, h2, h3 {
-  font-family: 'Orbitron', sans-serif;  /* Use Orbitron for all major headings */
-  font-weight: 700;                     /* Ensure bold weight (700) for Orbitron font */
-  color: #fff;                          /* Headings in white (will use neon glow or accents separately as needed) */
+  font-family: 'Orbitron', sans-serif;  /* Orbitron for all major headings */
+  font-weight: 700;
+  color: #fff;
   margin: 0 0 1rem;                     /* No top margin, space below */
 }
 p {
-  margin: 0 0 1rem;    /* Paragraphs spaced with bottom margin only */
+  margin: 0 0 1rem;
 }
 strong {
-  font-weight: 700;    /* Bold text (Roboto 700 for strong elements) */
+  font-weight: 700;
 }
 
 /* Navigation Bar */
@@ -33,14 +33,14 @@ header {
   padding: 0;
   display: flex;
   justify-content: center;
-  width: 100%;                        /* Nav bar spans full width */
-  background: rgba(0, 0, 0, 0.85);     /* Semi-transparent black background for nav */
+  width: 100%;
+  background: rgba(0, 0, 0, 0.85);
 }
 .nav-menu li {
   margin: 0 1rem;
 }
 .nav-menu a {
-  color: #0ff;                        /* Neon cyan text for nav links */
+  color: #0ff;                        /* Neon cyan for nav links */
   text-decoration: none;
   font-family: 'Orbitron', sans-serif;
   font-weight: 700;
@@ -48,12 +48,11 @@ header {
   display: block;
 }
 .nav-menu a:hover {
-  text-shadow: 0 0 5px #0ff;          /* Neon glow effect on hover */
+  text-shadow: 0 0 5px #0ff;
 }
 
 /* Hero Section */
 #hero {
-  /* Background image covering the hero section */
   background: url("../img/hero_bg.jpg") no-repeat center center;
   background-size: cover;
   position: relative;
@@ -63,21 +62,19 @@ header {
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  min-height: 60vh;                   /* Make hero section at least 60% of viewport height */
-  color: #fff;                        /* Default text color in hero (for tagline, etc.) */
+  min-height: 60vh;
+  color: #fff;
 }
 #hero h1 {
   font-size: 3rem;
-  color: #0ff;                        /* Bright cyan for title text */
-  text-shadow: 
-    0 0 10px #0ff, 
-    0 0 20px #0ff;                   /* Glowing neon effect around the title */
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
   margin-bottom: 0.5rem;
 }
 #hero .tagline {
   font-size: 1.2rem;
   font-style: italic;
-  color: #eee;                        /* Slightly lighter tagline text */
+  color: #eee;
   margin-bottom: 1.5rem;
 }
 #hero .cta-button {
@@ -86,7 +83,7 @@ header {
   font-size: 1rem;
   padding: 0.75rem 1.25rem;
   color: #000;
-  background: #ffa500;                /* Neon orange button background for contrast */
+  background: #ffa500;                /* Neon orange call-to-action button */
   text-decoration: none;
   border: none;
   border-radius: 4px;
@@ -94,16 +91,16 @@ header {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 #hero .cta-button:hover {
-  box-shadow: 0 0 10px #ffa500, 0 0 20px #ffa500;  /* Glow on hover */
+  box-shadow: 0 0 10px #ffa500, 0 0 20px #ffa500;
   transform: scale(1.05);
 }
 
-/* Section: Latest Music */
-#latest-music {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+/* Added hero logo spacing */
+#hero .hero-logo {
+  margin-bottom: 8rem; /* extra space between logo and tagline */
 }
+
+/* Section: Latest Music */
 #latest-music h2 em {
   font-style: italic;
 }
@@ -118,26 +115,37 @@ header {
   max-width: 200px;
   border: 2px solid #0ff;
   border-radius: 8px;
-  box-shadow: 0 0 8px #0ff;           /* Constant neon glow around album cover */
+  box-shadow: 0 0 8px #0ff;           /* Neon glow around album cover */
 }
 .music-info p {
   /* inherits global line-height and margins */
 }
 .download-link {
-  color: #ffa500;                     /* Orange accent for download link to stand out */
+  color: #ffa500;                     /* Orange accent for download links */
   font-weight: bold;
   text-decoration: none;
 }
 .download-link:hover {
-  text-shadow: 0 0 5px #ffa500;       /* Glow effect on hover for download link */
+  text-shadow: 0 0 5px #ffa500;
+}
 
-  /* Shared layout section wrapper */
+/* Shared layout section wrapper */
 .content-section {
   max-width: 1000px;
   margin: 0 auto;
   padding: 2rem 1rem;
 }
+
+/* Ensure album link displays in cyan */
+#latest-music .cta-link {
+  color: #0ff;
+  font-weight: bold;
+  text-decoration: none;
 }
+#latest-music .cta-link:hover {
+  text-shadow: 0 0 5px #0ff;
+}
+
 .cta-link.glow-blue {
   color: #00aaff;
   font-weight: bold;
@@ -145,20 +153,15 @@ header {
   text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff;
   transition: text-shadow 0.3s ease, color 0.3s ease;
 }
-
 .cta-link.glow-blue:hover {
-  color: #ffffff;
+  color: #fff;
   text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
 }
+
 /* Section: Latest Video */
-#latest-video {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
 #latest-video .video-container {
   position: relative;
-  padding-bottom: 56.25%;            /* 16:9 aspect ratio (9/16 = 0.5625) */
+  padding-bottom: 56.25%;            /* 16:9 aspect ratio */
   height: 0;
 }
 #latest-video .video-container iframe {
@@ -167,17 +170,17 @@ header {
   height: 100%;
   left: 0;
   top: 0;
-  border: 2px solid #09f;            /* Neon blue border around video frame */
+  border: 2px solid #09f;
   border-radius: 4px;
 }
 #latest-video .video-caption {
   font-size: 0.9rem;
   font-style: italic;
-  color: #ccc;                       /* Lighter, caption-style text */
+  color: #ccc;
   margin: 0.5rem 0 1.5rem;
 }
 #latest-video .cta-link {
-  color: #0ff;                       /* Use cyan for "More Videos »" link */
+  color: #0ff;
   font-weight: bold;
   text-decoration: none;
 }
@@ -185,32 +188,24 @@ header {
   text-shadow: 0 0 5px #0ff;
 }
 
-/* Section: Gallery Teaser */
-#art-gallery-teaser {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
+/* Section: Gallery */
 .gallery-thumbs {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
 }
-.gallery-thumbs a {
-  /* An optional block or flex on anchors could be added, but not necessary */
-}
 .gallery-thumbs img {
   max-width: 150px;
   height: auto;
-  border: 2px solid #222;            /* Thin dark border for thumbnails */
+  border: 2px solid #222;
   border-radius: 4px;
   transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
 .gallery-thumbs img:hover {
   border-color: #0ff;
   box-shadow: 0 0 8px #0ff;
-  transform: scale(1.05);            /* Slight zoom and glow on hover */
+  transform: scale(1.05);
 }
 .gallery-caption {
   font-size: 0.9rem;
@@ -220,15 +215,7 @@ header {
   margin-top: 0.5rem;
 }
 
-/* Section: About Teaser */
-#about-teaser {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-#about-teaser p {
-  /* Uses default body font and color; already has margins from global styles */
-}
+/* Section: About */
 #about-teaser a {
   color: #0ff;
   text-decoration: none;
@@ -241,17 +228,16 @@ header {
 footer {
   text-align: center;
   padding: 1rem 0;
-  background: #111;                  /* Slightly lighter black for footer section */
+  background: #111;
 }
 footer p {
-  color: #777;                       /* Subdued gray text for footer */
+  color: #777;
   font-size: 0.9rem;
   margin: 0;
 }
 
 /* Responsive Media Queries */
 @media (max-width: 600px) {
-  /* Stack nav menu vertically on smaller screens */
   .nav-menu {
     flex-direction: column;
     align-items: center;
@@ -259,7 +245,6 @@ footer p {
   .nav-menu li {
     margin: 0.5rem 0;
   }
-  /* Reduce hero text sizes on mobile */
   #hero h1 {
     font-size: 2rem;
   }
@@ -270,7 +255,6 @@ footer p {
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
   }
-  /* Stack music highlight (image above text) on mobile */
   .music-highlight {
     flex-direction: column;
     align-items: center;
@@ -279,7 +263,6 @@ footer p {
   .music-highlight img {
     margin-bottom: 1rem;
   }
-  /* Center text in music info when stacked */
   .music-info {
     text-align: center;
   }
@@ -292,14 +275,12 @@ footer p {
   align-items: center;
   margin: 24px 0;
 }
-
 .social-icons a img {
   width: 48px;
   height: 48px;
   transition: transform 0.2s, filter 0.2s;
   filter: grayscale(30%) brightness(1.3);
 }
-
 .social-icons a img:hover {
   transform: scale(1.15);
   filter: none;
