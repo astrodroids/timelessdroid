@@ -130,6 +130,13 @@ header {
 }
 .download-link:hover {
   text-shadow: 0 0 5px #ffa500;       /* Glow effect on hover for download link */
+
+  /* Shared layout section wrapper */
+.content-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
 }
 .cta-link.glow-blue {
   color: #00aaff;
