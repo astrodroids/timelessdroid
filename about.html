@@ -40,12 +40,19 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section id="hero">
-    <p class="hero-logo"><img src="assets/img/band-logo.jpg" width="180" height="180"></p>
+<!-- Hero Section -->
+<section id="hero">
+  <!-- Reintroduced logo, positioned via CSS -->
+  <img src="assets/img/band-logo.jpg" alt="Timeless Droid Logo" class="hero-logo">
+  
+  <!-- Text container for tagline and CTA, will be flex-aligned to bottom -->
+  <div class="hero-text">
     <p class="tagline">An odyssey that transcends time and space.</p>
-    <a class="cta-button" href="https://distrokid.com/hyperfollow/timelessdroid/timeless-droid">🎧 Listen to the Latest Release</a>
-  </section>
+    <!-- CTA button stays at bottom of hero due to flex alignment -->
+    <a href="https://distrokid.com/..." class="cta-button">Listen to the Latest Release</a>
+  </div>
+</section>
+
 
   <!-- About Section -->
   <section id="about-teaser" class="content-section">
