@@ -131,7 +131,18 @@ header {
 .download-link:hover {
   text-shadow: 0 0 5px #ffa500;       /* Glow effect on hover for download link */
 }
+.cta-link.glow-blue {
+  color: #00aaff;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff;
+  transition: text-shadow 0.3s ease, color 0.3s ease;
+}
 
+.cta-link.glow-blue:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
+}
 /* Section: Latest Video */
 #latest-video {
   max-width: 1000px;
