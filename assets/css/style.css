@@ -1,168 +1,241 @@
-/* Global Base Styles */
+/* === Timeless Droid Global Styles === */
+
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #000;             /* Dark background for sci-fi vibe */
-  color: #ddd;                        /* Light gray text for high contrast on dark */
-  font-family: 'Roboto', sans-serif;  /* Use Roboto as the default body font */
-  font-weight: 400;
-  line-height: 1.6;                   /* Comfortable line height for readability */
+  background: #000;
+  color: #ddd;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
-/* Headings and text elements */
+/* --- Typography --- */
 h1, h2, h3 {
-  font-family: 'Orbitron', sans-serif;  /* Orbitron for all major headings */
-  font-weight: 700;
+  font-family: 'Orbitron', 'Roboto', Arial, sans-serif;
   color: #fff;
-  margin: 0 0 1rem;                     /* No top margin, space below */
+  margin: 0 0 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 p {
-  margin: 0 0 1rem;
+  margin: 0 0 1.2em;
 }
 strong {
-  font-weight: 700;
+  font-weight: bold;
 }
 
-/* Navigation Bar */
+/* --- Navigation --- */
 header {
   width: 100%;
+  background: #000;
 }
 .nav-menu {
+  display: flex;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0,0,0,0.95);
+  border-bottom: 1px solid #111;
 }
 .nav-menu li {
-  margin: 0 1rem;
+  margin: 0 1.5rem;
 }
 .nav-menu a {
-  color: #0ff;                        /* Neon cyan for nav links */
+  color: #0ff;
   text-decoration: none;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Orbitron', 'Roboto', Arial, sans-serif;
   font-weight: 700;
-  padding: 0.5rem;
+  font-size: 1.15rem;
+  padding: 1.2rem 0.2rem 1rem 0.2rem;
   display: block;
+  transition: color 0.2s, text-shadow 0.2s;
 }
-.nav-menu a:hover {
-  text-shadow: 0 0 5px #0ff;
+.nav-menu a:hover,
+.nav-menu a:focus {
+  color: #00f6ff;
+  text-shadow: 0 0 8px #0ff;
 }
 
-/* Hero Section */
+/* --- HERO SECTION (FLEX LAYOUT) --- */
 #hero {
-  background: url("../img/hero_bg.jpg") no-repeat center center;
-  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80vh;
+  width: 100%;
   position: relative;
   text-align: center;
+  background: url("../img/hero-bg.jpg") center/cover no-repeat;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Timeless Droid logo placement in hero */
+#hero .hero-logo {
+  align-self: flex-start;
+  max-width: 150px;
+  opacity: 0.8;
+  margin: 1.2rem 0 0 2rem;
+  z-index: 2;
+}
+
+/* Group tagline and button at bottom */
+#hero .hero-text {
+  width: 100%;
+  margin-bottom: 2.4rem;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-  min-height: 60vh;
-  color: #fff;
-}
-#hero h1 {
-  font-size: 3rem;
-  color: #0ff;
-  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
-  margin-bottom: 0.5rem;
 }
 #hero .tagline {
-  font-size: 1.2rem;
+  display: block;
+  font-size: 1.4rem;
   font-style: italic;
-  color: #eee;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
+  color: #e3faff;
+  text-shadow: 0 0 8px #003344;
 }
+
 #hero .cta-button {
   display: inline-block;
   font-weight: 700;
-  font-size: 1rem;
-  padding: 0.75rem 1.25rem;
+  font-size: 1.1rem;
+  padding: 0.85rem 1.7rem;
   color: #000;
-  background: #ffa500;                /* Neon orange call-to-action button */
-  text-decoration: none;
+  background: #ffaa00;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-#hero .cta-button:hover {
-  box-shadow: 0 0 10px #ffa500, 0 0 20px #ffa500;
-  transform: scale(1.05);
-}
-
-/* Added hero logo spacing */
-#hero .hero-logo {
-  margin-bottom: 8rem; /* extra space between logo and tagline */
-}
-
-/* Section: Latest Music */
-#latest-music h2 em {
-  font-style: italic;
-}
-.music-highlight {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-}
-.music-highlight img {
-  max-width: 200px;
-  border: 2px solid #0ff;
-  border-radius: 8px;
-  box-shadow: 0 0 8px #0ff;           /* Neon glow around album cover */
-}
-.music-info p {
-  /* inherits global line-height and margins */
-}
-.download-link {
-  color: #ffa500;                     /* Orange accent for download links */
-  font-weight: bold;
   text-decoration: none;
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 0 10px #ffaa00b0;
 }
-.download-link:hover {
-  text-shadow: 0 0 5px #ffa500;
+#hero .cta-button:hover,
+#hero .cta-button:focus {
+  box-shadow: 0 0 20px #ffaa00, 0 0 30px #ffaa00b0;
+  background: #ffc045;
+  transform: scale(1.04);
 }
 
-/* Shared layout section wrapper */
+/* --- Content Sections --- */
 .content-section {
-  max-width: 1000px;
+  max-width: 1020px;
   margin: 0 auto;
   padding: 2rem 1rem;
 }
 
-/* Ensure album link displays in cyan */
-#latest-music .cta-link {
+/* --- Music/Video Highlights --- */
+.music-highlight,
+.video-highlight {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.7rem;
+  margin: 1.7rem 0;
+}
+.music-highlight img,
+.video-highlight img {
+  max-width: 200px;
+  border: 2px solid #0ff;
+  border-radius: 8px;
+  box-shadow: 0 0 12px #0ff4;
+}
+.music-info,
+.video-info {
+  flex: 1 1 320px;
+}
+
+/* --- Download and CTA Links --- */
+.download-link,
+.cta-link,
+.cta-link.glow-blue {
   color: #0ff;
   font-weight: bold;
   text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
 }
-#latest-music .cta-link:hover {
-  text-shadow: 0 0 5px #0ff;
-}
-
-.cta-link.glow-blue {
-  color: #00aaff;
-  font-weight: bold;
-  text-decoration: none;
-  text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff;
-  transition: text-shadow 0.3s ease, color 0.3s ease;
-}
+.download-link:hover,
+.cta-link:hover,
 .cta-link.glow-blue:hover {
   color: #fff;
-  text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
+  text-shadow: 0 0 8px #0ff, 0 0 20px #0ff;
+}
+.cta-link.glow-blue {
+  color: #00aaff;
+  text-shadow: 0 0 6px #00aaff, 0 0 12px #00aaff;
 }
 
-/* Section: Latest Video */
+/* --- Gallery --- */
+.gallery-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  justify-content: center;
+}
+.gallery-thumbs img {
+  max-width: 150px;
+  height: auto;
+  border: 2px solid #222;
+  border-radius: 6px;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.gallery-thumbs img:hover {
+  border-color: #0ff;
+  box-shadow: 0 0 16px #0ff6;
+  transform: scale(1.07);
+}
+.gallery-caption {
+  font-size: 1rem;
+  color: #ccc;
+  text-align: center;
+  margin-top: 0.7rem;
+}
+
+/* --- Lyrics Cards --- */
+.lyrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+.lyric-card {
+  background: rgba(24,32,40,0.95);
+  border: 1.5px solid #00e0ff99;
+  border-radius: 11px;
+  box-shadow: 0 0 20px #009eff24;
+  padding: 1.2rem 1.1rem 1rem 1.1rem;
+  color: #e4faff;
+  font-size: 1rem;
+  font-family: 'Roboto Mono', 'Roboto', monospace, sans-serif;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+.lyric-card h2 {
+  font-family: 'Orbitron', 'Roboto', Arial, sans-serif;
+  font-size: 1.05rem;
+  color: #0ff;
+  margin-bottom: 0.6em;
+}
+.lyric-card pre {
+  font-family: inherit;
+  color: inherit;
+  background: none;
+  padding: 0;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* --- Video Section --- */
 #latest-video .video-container {
   position: relative;
-  padding-bottom: 56.25%;            /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;
   height: 0;
+  margin-bottom: 1.5rem;
 }
 #latest-video .video-container iframe {
   position: absolute;
@@ -171,118 +244,90 @@ header {
   left: 0;
   top: 0;
   border: 2px solid #09f;
-  border-radius: 4px;
-}
-#latest-video .video-caption {
-  font-size: 0.9rem;
-  font-style: italic;
-  color: #ccc;
-  margin: 0.5rem 0 1.5rem;
-}
-#latest-video .cta-link {
-  color: #0ff;
-  font-weight: bold;
-  text-decoration: none;
-}
-#latest-video .cta-link:hover {
-  text-shadow: 0 0 5px #0ff;
+  border-radius: 6px;
 }
 
-/* Section: Gallery */
-.gallery-thumbs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-.gallery-thumbs img {
-  max-width: 150px;
-  height: auto;
-  border: 2px solid #222;
-  border-radius: 4px;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-}
-.gallery-thumbs img:hover {
-  border-color: #0ff;
-  box-shadow: 0 0 8px #0ff;
-  transform: scale(1.05);
-}
-.gallery-caption {
-  font-size: 0.9rem;
-  font-style: italic;
-  color: #ccc;
-  text-align: center;
-  margin-top: 0.5rem;
-}
-
-/* Section: About */
+/* --- About and Links --- */
 #about-teaser a {
   color: #0ff;
   text-decoration: none;
+  font-weight: 700;
 }
 #about-teaser a:hover {
-  text-shadow: 0 0 5px #0ff;
+  text-shadow: 0 0 8px #0ff;
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1rem 0;
-  background: #111;
+#art-gallery-teaser a {
+  color: #0ff;
+  text-decoration: underline;
 }
-footer p {
-  color: #777;
-  font-size: 0.9rem;
-  margin: 0;
+#art-gallery-teaser a:hover {
+  text-shadow: 0 0 8px #0ff;
 }
 
-/* Responsive Media Queries */
-@media (max-width: 600px) {
-  .nav-menu {
-    flex-direction: column;
-    align-items: center;
-  }
-  .nav-menu li {
-    margin: 0.5rem 0;
-  }
-  #hero h1 {
-    font-size: 2rem;
-  }
-  #hero .tagline {
-    font-size: 1rem;
-  }
-  #hero .cta-button {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-  }
-  .music-highlight {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .music-highlight img {
-    margin-bottom: 1rem;
-  }
-  .music-info {
-    text-align: center;
-  }
-}
+/* --- Social Icons --- */
 .social-icons {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 17px;
   justify-content: center;
   align-items: center;
-  margin: 24px 0;
+  margin: 1.7rem 0 1.2rem 0;
 }
 .social-icons a img {
-  width: 48px;
-  height: 48px;
-  transition: transform 0.2s, filter 0.2s;
+  width: 44px;
+  height: 44px;
   filter: grayscale(30%) brightness(1.3);
+  transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
 }
 .social-icons a img:hover {
-  transform: scale(1.15);
   filter: none;
-  box-shadow: 0 2px 12px #00ffe7;
+  transform: scale(1.16);
+  box-shadow: 0 0 18px #00ffe7a0;
 }
+
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 2rem 0 1rem 0;
+  background: #111;
+  border-top: 1px solid #222;
+}
+footer p {
+  color: #777;
+  font-size: 1rem;
+  margin: 0.7em 0 0.5em 0;
+}
+
+/* --- Contact Section --- */
+#contact {
+  margin-top: 2.5rem;
+}
+#contact h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+  color: #0ff;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 900px) {
+  .content-section { max-width: 98vw; }
+  .lyrics-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  html, body { font-size: 16px; }
+  .nav-menu { flex-direction: column; }
+  .nav-menu li { margin: 0.2rem 0; }
+  #hero .hero-logo { max-width: 96px; margin-left: 0.7rem; }
+  #hero .tagline { font-size: 1.02rem; }
+  .music-highlight, .video-highlight { flex-direction: column; gap: 1rem; }
+  .gallery-thumbs img { max-width: 90px; }
+  .lyrics-grid { gap: 1.1rem; }
+}
+
+/* --- Utility Classes (optional, for quick tweaks) --- */
+.text-center { text-align: center !important; }
+.mt-2 { margin-top: 2rem !important; }
+.mb-2 { margin-bottom: 2rem !important; }
+
