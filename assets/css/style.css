@@ -170,7 +170,7 @@ header {
     gap: 1.1rem;
   }
 }
-
+}
   .nav-menu::-webkit-scrollbar {
     display: none; /* For Chrome, Safari */
   }
