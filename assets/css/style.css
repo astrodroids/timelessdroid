@@ -77,12 +77,13 @@ header {
 /* Timeless Droid logo placement in hero */
 #hero .hero-logo {
   align-self: flex-start;
+  width: 100%;
   max-width: 150px;
-  opacity: 0.8;
+  height: auto;
+  opacity: 0.85;
   margin: 1.2rem 0 0 2rem;
   z-index: 2;
 }
-
 /* Group tagline and button at bottom */
 #hero .hero-text {
   width: 100%;
@@ -130,7 +131,27 @@ header {
     padding-top: 50px;
   }
 }
+@media (max-width: 600px) {
+  .nav-menu {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0.7rem 1rem;
+    gap: 1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* For Firefox */
+  }
 
+  .nav-menu::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari */
+  }
+
+  .nav-menu li {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+}
 
 /* --- Content Sections --- */
 .content-section {
