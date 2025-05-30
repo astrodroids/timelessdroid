@@ -374,16 +374,6 @@ footer p {
   .lyrics-grid { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 600px) {
-  html, body { font-size: 16px; }
-  .nav-menu { flex-direction: column; }
-  .nav-menu li { margin: 0.2rem 0; }
-  #hero .hero-logo { max-width: 96px; margin-left: 0.7rem; }
-  #hero .tagline { font-size: 1.02rem; }
-  .music-highlight, .video-highlight { flex-direction: column; gap: 1rem; }
-  .gallery-thumbs img { max-width: 90px; }
-  .lyrics-grid { gap: 1.1rem; }
-}
 
 /* --- Utility Classes (optional, for quick tweaks) --- */
 .text-center { text-align: center !important; }
