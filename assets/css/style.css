@@ -147,15 +147,6 @@ header {
     scrollbar-width: none; /* Firefox */
   }
 
-  .nav-menu::-webkit-scrollbar {
-    display: none; /* Chrome & Safari */
-  }
-
-  .nav-menu li {
-    flex: 0 0 auto;
-    margin: 0;
-  }
-
   #hero .hero-logo {
     max-width: 96px;
     margin-left: 0.7rem;
