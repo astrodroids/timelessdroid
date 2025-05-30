@@ -36,8 +36,8 @@ header {
   justify-content: center;
   list-style: none;
   margin: 0;
-  padding: 0;
-  background: rgba(0,0,0,0.95);
+  padding: 0.8rem 2rem;
+  background: rgba(0, 0, 0, 0.95);
   border-bottom: 1px solid #111;
 }
 .nav-menu li {
@@ -49,7 +49,6 @@ header {
   font-family: 'Orbitron', 'Roboto', Arial, sans-serif;
   font-weight: 700;
   font-size: 1.15rem;
-  padding: 1.2rem 0.2rem 1rem 0.2rem;
   display: block;
   transition: color 0.2s, text-shadow 0.2s;
 }
@@ -59,7 +58,7 @@ header {
   text-shadow: 0 0 8px #0ff;
 }
 
-/* --- HERO SECTION (FLEX LAYOUT) --- */
+/* --- HERO SECTION --- */
 #hero {
   display: flex;
   flex-direction: column;
@@ -72,9 +71,8 @@ header {
   background: url("../img/hero-bg.jpg") center/cover no-repeat;
   color: #fff;
   overflow: hidden;
+  padding-top: 0;
 }
-
-/* Timeless Droid logo placement in hero */
 #hero .hero-logo {
   align-self: flex-start;
   width: 100%;
@@ -84,7 +82,6 @@ header {
   margin: 1.2rem 0 0 2rem;
   z-index: 2;
 }
-/* Group tagline and button at bottom */
 #hero .hero-text {
   width: 100%;
   margin-bottom: 2.4rem;
@@ -101,7 +98,6 @@ header {
   color: #e3faff;
   text-shadow: 0 0 8px #003344;
 }
-
 #hero .cta-button {
   display: inline-block;
   font-weight: 700;
@@ -121,60 +117,6 @@ header {
   box-shadow: 0 0 20px #ffaa00, 0 0 30px #ffaa00b0;
   background: #ffc045;
   transform: scale(1.04);
-}
-#hero {
-  /* ... existing styles ... */
-  padding-top: 0px;   /* Adjust as needed to fit under the nav */
-}
-@media (max-width: 700px) {
-  #hero {
-    padding-top: 50px;
-  }
-}
-
-  .nav-menu {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding: 0.7rem 1rem;
-    gap: 1rem;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-  }
-
-  #hero .hero-logo {
-    max-width: 96px;
-    margin-left: 0.7rem;
-  }
-
-  #hero .tagline {
-    font-size: 1.02rem;
-  }
-
-  .music-highlight,
-  .video-highlight {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .gallery-thumbs img {
-    max-width: 90px;
-  }
-
-  .lyrics-grid {
-    gap: 1.1rem;
-  }
-}
-}
-  .nav-menu::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari */
-  }
-
-  .nav-menu li {
-    flex: 0 0 auto;
-    margin: 0;
-  }
 }
 
 /* --- Content Sections --- */
@@ -203,26 +145,6 @@ header {
 .music-info,
 .video-info {
   flex: 1 1 320px;
-}
-
-/* --- Download and CTA Links --- */
-.download-link,
-.cta-link,
-.cta-link.glow-blue {
-  color: #0ff;
-  font-weight: bold;
-  text-decoration: none;
-  transition: color 0.2s, text-shadow 0.2s;
-}
-.download-link:hover,
-.cta-link:hover,
-.cta-link.glow-blue:hover {
-  color: #fff;
-  text-shadow: 0 0 8px #0ff, 0 0 20px #0ff;
-}
-.cta-link.glow-blue {
-  color: #00aaff;
-  text-shadow: 0 0 6px #00aaff, 0 0 12px #00aaff;
 }
 
 /* --- Gallery --- */
@@ -254,11 +176,11 @@ header {
 /* --- Lyrics Cards --- */
 .lyrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
 }
 .lyric-card {
-  background: rgba(24,32,40,0.95);
+  background: rgba(24, 32, 40, 0.95);
   border: 1.5px solid #00e0ff99;
   border-radius: 11px;
   box-shadow: 0 0 20px #009eff24;
@@ -311,7 +233,6 @@ header {
 #about-teaser a:hover {
   text-shadow: 0 0 8px #0ff;
 }
-
 #art-gallery-teaser a {
   color: #0ff;
   text-decoration: underline;
@@ -364,15 +285,54 @@ footer p {
   color: #0ff;
 }
 
-/* --- Responsive Adjustments --- */
+/* --- Responsive --- */
 @media (max-width: 900px) {
   .content-section { max-width: 98vw; }
   .lyrics-grid { grid-template-columns: 1fr; }
 }
+@media (max-width: 700px) {
+  #hero { padding-top: 50px; }
+}
+@media (max-width: 600px) {
+  html, body { font-size: 16px; }
+  .nav-menu {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0.7rem 1rem;
+    gap: 1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-menu::-webkit-scrollbar {
+    display: none;
+  }
+  .nav-menu li {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+  #hero .hero-logo {
+    max-width: 96px;
+    margin-left: 0.7rem;
+  }
+  #hero .tagline {
+    font-size: 1.02rem;
+  }
+  .music-highlight,
+  .video-highlight {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .gallery-thumbs img {
+    max-width: 90px;
+  }
+  .lyrics-grid {
+    gap: 1.1rem;
+  }
+}
 
-
-/* --- Utility Classes (optional, for quick tweaks) --- */
+/* --- Utility Classes --- */
 .text-center { text-align: center !important; }
 .mt-2 { margin-top: 2rem !important; }
 .mb-2 { margin-bottom: 2rem !important; }
-
