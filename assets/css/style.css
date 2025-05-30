@@ -123,7 +123,7 @@ header {
 }
 #hero {
   /* ... existing styles ... */
-  padding-top: 72px;   /* Adjust as needed to fit under the nav */
+  padding-top: 64px;   /* Adjust as needed to fit under the nav */
 }
 @media (max-width: 700px) {
   #hero {
