@@ -131,10 +131,6 @@ header {
     padding-top: 50px;
   }
 }
-@media (max-width: 600px) {
-  html, body {
-    font-size: 16px;
-  }
 
   .nav-menu {
     flex-direction: row;
