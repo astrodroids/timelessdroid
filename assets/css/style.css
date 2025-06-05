@@ -336,3 +336,129 @@ footer p {
 .text-center { text-align: center !important; }
 .mt-2 { margin-top: 2rem !important; }
 .mb-2 { margin-bottom: 2rem !important; }
+/* === Timeless Droid: Superagency & From the Human Sections === */
+
+/* Layout for Superagency + From the Human Sections */
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.portrait-col,
+.band-img-col,
+.deep-purple-col {
+  flex: 0 0 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 150px;
+  margin-bottom: 1.4rem;
+}
+
+.portrait-ai,
+.band-photo,
+.deep-purple-poster {
+  width: 100%;
+  max-width: 210px;
+  border-radius: 10px;
+  border: 2px solid #0ff;
+  box-shadow: 0 0 20px #00fff966;
+  background: #111b;
+  margin-bottom: 0.6rem;
+}
+
+.text-col,
+.human-story-col {
+  flex: 1 1 350px;
+  min-width: 220px;
+  color: #e3faff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#superagency h3,
+#from-the-human h3 {
+  color: #0ff;
+  margin-top: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.03em;
+}
+
+#superagency blockquote {
+  background: rgba(32,48,64,0.92);
+  border-left: 4px solid #00f0ff;
+  margin: 1.2rem 0 1.5rem 0;
+  padding: 1.1rem 1.5rem 1.1rem 1.2rem;
+  font-size: 1.09rem;
+  color: #b2e9ff;
+  border-radius: 7px;
+  box-shadow: 0 0 10px #00e9ff24;
+  font-style: italic;
+  position: relative;
+}
+#superagency blockquote .scholar-attrib {
+  display: block;
+  font-size: 0.95em;
+  color: #7af2e2;
+  font-style: normal;
+  margin-top: 0.5em;
+  letter-spacing: 0.01em;
+}
+
+#from-the-human .from-the-human-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin-top: 1.8rem;
+}
+.band-img-col,
+.deep-purple-col {
+  flex: 0 0 175px;
+  min-width: 120px;
+}
+.band-photo,
+.deep-purple-poster {
+  width: 100%;
+  max-width: 175px;
+  margin-bottom: 0.4rem;
+}
+
+.human-story-col {
+  flex: 1 1 320px;
+  min-width: 200px;
+}
+
+@media (max-width: 900px) {
+  .flex-row,
+  #from-the-human .from-the-human-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .portrait-col,
+  .band-img-col,
+  .deep-purple-col {
+    margin-bottom: 0.6rem;
+  }
+  .text-col,
+  .human-story-col {
+    min-width: 0;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .portrait-ai,
+  .band-photo,
+  .deep-purple-poster {
+    max-width: 95vw;
+    min-width: 120px;
+  }
+}
