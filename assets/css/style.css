@@ -14,16 +14,36 @@ html, body {
 /* --- Typography --- */
 h1, h2, h3 {
   font-family: 'Orbitron', 'Roboto', Arial, sans-serif;
-  color: #fff;
-  margin: 0 0 1rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+  margin: 0 0 1rem;
 }
-p {
-  margin: 0 0 1.2em;
+
+/* CYAN <h2> headers everywhere */
+h2 {
+  color: #00ffe7;
+  text-shadow: 0 0 8px #00ffe7, 0 0 2px #00ffe7aa;
 }
-strong {
-  font-weight: bold;
+
+/* (OPTIONAL: If you want <h3> to also pop in cyan, uncomment below) */
+/*
+h3 {
+  color: #00ffe7;
+  text-shadow: 0 0 8px #00ffe7, 0 0 2px #00ffe7aa;
+}
+*/
+
+p { margin: 0 0 1.2em; }
+strong { font-weight: bold; }
+
+/* --- Universal Link Styling: All links always cyan, never purple/blue */
+a, a:visited, a:active, a:hover, a:focus {
+  color: #00ffe7 !important;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover, a:focus {
+  text-shadow: 0 0 8px #00ffe7;
 }
 
 /* --- Navigation --- */
@@ -40,11 +60,9 @@ header {
   background: rgba(0, 0, 0, 0.95);
   border-bottom: 1px solid #111;
 }
-.nav-menu li {
-  margin: 0 1.5rem;
-}
+.nav-menu li { margin: 0 1.5rem; }
 .nav-menu a {
-  color: #0ff;
+  color: #00ffe7;
   text-decoration: none;
   font-family: 'Orbitron', 'Roboto', Arial, sans-serif;
   font-weight: 700;
@@ -52,10 +70,9 @@ header {
   display: block;
   transition: color 0.2s, text-shadow 0.2s;
 }
-.nav-menu a:hover,
-.nav-menu a:focus {
+.nav-menu a:hover, .nav-menu a:focus {
   color: #00f6ff;
-  text-shadow: 0 0 8px #0ff;
+  text-shadow: 0 0 8px #00ffe7;
 }
 
 /* --- HERO SECTION --- */
@@ -138,9 +155,9 @@ header {
 .music-highlight img,
 .video-highlight img {
   max-width: 200px;
-  border: 2px solid #0ff;
+  border: 2px solid #00ffe7;
   border-radius: 8px;
-  box-shadow: 0 0 12px #0ff4;
+  box-shadow: 0 0 12px #00ffe744;
 }
 .music-info,
 .video-info {
@@ -162,8 +179,8 @@ header {
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 .gallery-thumbs img:hover {
-  border-color: #0ff;
-  box-shadow: 0 0 16px #0ff6;
+  border-color: #00ffe7;
+  box-shadow: 0 0 16px #00ffe766;
   transform: scale(1.07);
 }
 .gallery-caption {
@@ -194,7 +211,7 @@ header {
 .lyric-card h2 {
   font-family: 'Orbitron', 'Roboto', Arial, sans-serif;
   font-size: 1.05rem;
-  color: #0ff;
+  color: #00ffe7;
   margin-bottom: 0.6em;
 }
 .lyric-card pre {
@@ -225,20 +242,13 @@ header {
 }
 
 /* --- About and Links --- */
-#about-teaser a {
-  color: #0ff;
-  text-decoration: none;
+#about-teaser a, #art-gallery-teaser a {
+  color: #00ffe7;
+  text-decoration: underline;
   font-weight: 700;
 }
-#about-teaser a:hover {
-  text-shadow: 0 0 8px #0ff;
-}
-#art-gallery-teaser a {
-  color: #0ff;
-  text-decoration: underline;
-}
-#art-gallery-teaser a:hover {
-  text-shadow: 0 0 8px #0ff;
+#about-teaser a:hover, #art-gallery-teaser a:hover {
+  text-shadow: 0 0 8px #00ffe7;
 }
 
 /* --- Social Icons --- */
@@ -256,7 +266,8 @@ header {
   filter: grayscale(30%) brightness(1.3);
   transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
 }
-.social-icons a img:hover {
+.social-icons a img:hover,
+.social-icons a:focus img {
   filter: none;
   transform: scale(1.16);
   box-shadow: 0 0 18px #00ffe7a0;
@@ -282,7 +293,8 @@ footer p {
 #contact h2 {
   font-size: 1.3rem;
   margin-bottom: 1.2rem;
-  color: #0ff;
+  color: #00ffe7;
+  text-shadow: 0 0 8px #00ffe7, 0 0 2px #00ffe7aa;
 }
 
 /* --- Responsive --- */
@@ -305,40 +317,23 @@ footer p {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
-  .nav-menu::-webkit-scrollbar {
-    display: none;
-  }
-  .nav-menu li {
-    flex: 0 0 auto;
-    margin: 0;
-  }
-  #hero .hero-logo {
-    max-width: 96px;
-    margin-left: 0.7rem;
-  }
-  #hero .tagline {
-    font-size: 1.02rem;
-  }
+  .nav-menu::-webkit-scrollbar { display: none; }
+  .nav-menu li { flex: 0 0 auto; margin: 0; }
+  #hero .hero-logo { max-width: 96px; margin-left: 0.7rem; }
+  #hero .tagline { font-size: 1.02rem; }
   .music-highlight,
-  .video-highlight {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .gallery-thumbs img {
-    max-width: 90px;
-  }
-  .lyrics-grid {
-    gap: 1.1rem;
-  }
+  .video-highlight { flex-direction: column; gap: 1rem; }
+  .gallery-thumbs img { max-width: 90px; }
+  .lyrics-grid { gap: 1.1rem; }
 }
 
 /* --- Utility Classes --- */
 .text-center { text-align: center !important; }
 .mt-2 { margin-top: 2rem !important; }
 .mb-2 { margin-bottom: 2rem !important; }
+
 /* === Timeless Droid: Superagency & From the Human Sections === */
 
-/* Layout for Superagency + From the Human Sections */
 .flex-row {
   display: flex;
   flex-wrap: wrap;
@@ -364,7 +359,7 @@ footer p {
   width: 100%;
   max-width: 210px;
   border-radius: 10px;
-  border: 2px solid #0ff;
+  border: 2px solid #00ffe7;
   box-shadow: 0 0 20px #00fff966;
   background: #111b;
   margin-bottom: 0.6rem;
@@ -382,10 +377,11 @@ footer p {
 
 #superagency h3,
 #from-the-human h3 {
-  color: #0ff;
+  color: #00ffe7;
   margin-top: 0;
   font-size: 1.5rem;
   letter-spacing: 0.03em;
+  text-shadow: 0 0 8px #00ffe7, 0 0 2px #00ffe7aa;
 }
 
 #superagency blockquote {
@@ -478,3 +474,5 @@ footer p {
     margin: 0 auto;
   }
 }
+
+/* --- End Timeless Droid Styles --- */
