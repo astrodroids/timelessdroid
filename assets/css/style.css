@@ -462,3 +462,19 @@ footer p {
     min-width: 120px;
   }
 }
+@media (max-width: 800px) {
+  #superagency.flex-row {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  .portrait-col {
+    max-width: 100% !important;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+  }
+  .portrait-ai {
+    width: 75vw !important;
+    max-width: 350px !important;
+    margin: 0 auto;
+  }
+}
