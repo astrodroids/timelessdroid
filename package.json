@@ -1,1 +1,12 @@
-
+{
+  "name": "timeless-droid",
+  "version": "1.0.0",
+  "description": "Code experiments and enhancements for the Timeless Droid site",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo 'No start script yet'",
+    "test": "echo 'No tests yet'"
+  },
+  "author": "Rick & G. Droid",
+  "license": "MIT"
+}
