@@ -172,7 +172,7 @@ header {
   justify-content: center;
 }
 .gallery-thumbs img {
-  max-width: 150px;
+  width: 150px;
   height: auto;
   border: 2px solid #222;
   border-radius: 6px;
