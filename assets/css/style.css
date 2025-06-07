@@ -172,7 +172,7 @@ header {
   justify-content: center;
 }
 .gallery-thumbs img {
-  max-width: 150px;
+  width: 150px;
   height: auto;
   border: 2px solid #222;
   border-radius: 6px;
@@ -183,6 +183,9 @@ header {
   box-shadow: 0 0 16px #00ffe766;
   transform: scale(1.07);
 }
+.img-square { aspect-ratio: 1 / 1; object-fit: cover; }
+.img-portrait { aspect-ratio: 9 / 16; object-fit: cover; }
+.img-landscape { aspect-ratio: 16 / 9; object-fit: cover; }
 .gallery-caption {
   font-size: 1rem;
   color: #ccc;
