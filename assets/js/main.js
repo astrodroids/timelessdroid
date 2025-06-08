@@ -5,16 +5,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const tagline = document.querySelector('.tagline');
   if (tagline) tagline.classList.add('visible');
 
-  const viewerImg = document.getElementById('viewer-image');
+  const viewerImg  = document.getElementById('viewer-image');
+  const viewerPrev = document.getElementById('viewer-prev');
+  const viewerNext = document.getElementById('viewer-next');
+
+  let activeRow   = [];
+  let activeIndex = 0;
 
   function showImage(img) {
+    if (!img) return;
     if (viewerImg) viewerImg.src = img.dataset.full || img.src;
+    const rowImgs = Array.from(img.closest('.scroll-container').querySelectorAll('.scroll-row img'));
+    activeRow   = rowImgs;
+    activeIndex = rowImgs.indexOf(img);
+  }
+
+  function changeImage(step) {
+    if (!activeRow.length) return;
+    activeIndex = (activeIndex + step + activeRow.length) % activeRow.length;
+    const img = activeRow[activeIndex];
+    if (img) {
+      viewerImg.src = img.dataset.full || img.src;
+      img.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+    }
   }
 
   document.querySelectorAll('.scroll-row img').forEach(img => {
-    img.addEventListener('mouseenter', () => showImage(img));
-    img.addEventListener('touchstart', () => showImage(img));
+    const handler = () => showImage(img);
+    img.addEventListener('mouseenter', handler);
+    img.addEventListener('touchstart', handler);
+    img.addEventListener('click', handler);
   });
+
+  if (viewerPrev) viewerPrev.addEventListener('click', () => changeImage(-1));
+  if (viewerNext) viewerNext.addEventListener('click', () => changeImage(1));
 
   document.querySelectorAll('.scroll-container').forEach(container => {
     const row   = container.querySelector('.scroll-row');
@@ -26,6 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (left)  left.addEventListener('click',  () => row.scrollBy({left:-row.clientWidth, behavior:'smooth'}));
     if (right) right.addEventListener('click', () => row.scrollBy({left: row.clientWidth, behavior:'smooth'}));
 
+    function autoNext() {
+      if (!activeRow.length) {
+        activeRow = Array.from(row.querySelectorAll('img'));
+        activeIndex = 0;
+      }
+      changeImage(1);
+    }
+
     if (play) {
       play.addEventListener('click', () => {
         if (auto) {
@@ -33,12 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
           auto = null;
           play.textContent = 'Play';
         } else {
-          auto = setInterval(() => {
-            row.scrollBy({left:1});
-            if (row.scrollLeft + row.clientWidth >= row.scrollWidth) {
-              row.scrollLeft = 0;
-            }
-          }, 30);
+          auto = setInterval(autoNext, 2000);
           play.textContent = 'Pause';
         }
       });
