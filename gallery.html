@@ -59,32 +59,46 @@
     <h2>AI Art Gallery</h2>
     <p>Step into Timeless Droid’s visual dimension – an AI-driven art gallery where fantasy and futurism collide. Each image here is a page from the story, dreamed up by G. Droid’s neural imagination and guided by Rick’s artistic vision. You’ll encounter neon deities, cosmic landscapes, and ancient legends reimagined in digital paint. These artworks aren’t just illustrations; they’re portals. They invite you to see the music and hear the visuals – to experience the Timeless Droid universe with all senses engaged.</p>
     <p>In this gallery, technology becomes the paintbrush. The AI art pieces evolve from a mix of Rick’s prompts, mythic lore, and the machine’s own creative leaps. One moment you might find a robot sage meditating under a cyberpunk sky, the next an ancient warrior bathed in electric glow. It’s a reflection of what Timeless Droid stands for: bridging epochs and genres to create something profoundly new. Enjoy wandering through these scenes – and keep an eye out for new additions, as the gallery grows with each chapter of the Timeless Droid saga.</p>
-    <div id="image-viewer" class="image-viewer">
-      <span id="viewer-close" class="close">&times;</span>
-      <img id="viewer-img" src="" alt="AI artwork" />
+    <div id="gallery-viewer" class="gallery-viewer">
+      <img id="viewer-image" src="assets/img/gallery/square1.jpg" alt="Selected artwork" />
     </div>
     
     <section class="thumb-section">
       <h3>Square Format (1:1)</h3>
-      <div class="gallery-thumbs">
-        <img class="img-square" src="assets/img/gallery/square1.jpg" alt="Square art 1" data-full="assets/img/gallery/square1.jpg" loading="lazy" />
-        <img class="img-square" src="assets/img/gallery/square2.jpg" alt="Square art 2" data-full="assets/img/gallery/square2.jpg" loading="lazy" />
+      <div class="scroll-container">
+        <button class="scroll-btn scroll-left" aria-label="Previous">&#10094;</button>
+        <div class="gallery-thumbs scroll-row">
+          <img class="img-square" src="assets/img/gallery/square1.jpg" alt="Square art 1" data-full="assets/img/gallery/square1.jpg" loading="lazy" />
+          <img class="img-square" src="assets/img/gallery/square2.jpg" alt="Square art 2" data-full="assets/img/gallery/square2.jpg" loading="lazy" />
+        </div>
+        <button class="scroll-btn scroll-right" aria-label="Next">&#10095;</button>
+        <button class="scroll-btn scroll-play" aria-label="Play/Pause">Play</button>
       </div>
     </section>
 
     <section class="thumb-section">
       <h3>Portrait Format (9:16)</h3>
-      <div class="gallery-thumbs">
-        <img class="img-portrait" src="assets/img/gallery/portrait1.jpg" alt="Portrait art 1" data-full="assets/img/gallery/portrait1.jpg" loading="lazy" />
-        <img class="img-portrait" src="assets/img/gallery/portrait2.jpg" alt="Portrait art 2" data-full="assets/img/gallery/portrait2.jpg" loading="lazy" />
+      <div class="scroll-container">
+        <button class="scroll-btn scroll-left" aria-label="Previous">&#10094;</button>
+        <div class="gallery-thumbs scroll-row">
+          <img class="img-portrait" src="assets/img/gallery/portrait1.jpg" alt="Portrait art 1" data-full="assets/img/gallery/portrait1.jpg" loading="lazy" />
+          <img class="img-portrait" src="assets/img/gallery/portrait2.jpg" alt="Portrait art 2" data-full="assets/img/gallery/portrait2.jpg" loading="lazy" />
+        </div>
+        <button class="scroll-btn scroll-right" aria-label="Next">&#10095;</button>
+        <button class="scroll-btn scroll-play" aria-label="Play/Pause">Play</button>
       </div>
     </section>
 
     <section class="thumb-section">
       <h3>Landscape Format (16:9)</h3>
-      <div class="gallery-thumbs">
-        <img class="img-landscape" src="assets/img/gallery/landscape1.jpg" alt="Landscape art 1" data-full="assets/img/gallery/landscape1.jpg" loading="lazy" />
-        <img class="img-landscape" src="assets/img/gallery/landscape2.jpg" alt="Landscape art 2" data-full="assets/img/gallery/landscape2.jpg" loading="lazy" />
+      <div class="scroll-container">
+        <button class="scroll-btn scroll-left" aria-label="Previous">&#10094;</button>
+        <div class="gallery-thumbs scroll-row">
+          <img class="img-landscape" src="assets/img/gallery/landscape1.jpg" alt="Landscape art 1" data-full="assets/img/gallery/landscape1.jpg" loading="lazy" />
+          <img class="img-landscape" src="assets/img/gallery/landscape2.jpg" alt="Landscape art 2" data-full="assets/img/gallery/landscape2.jpg" loading="lazy" />
+        </div>
+        <button class="scroll-btn scroll-right" aria-label="Next">&#10095;</button>
+        <button class="scroll-btn scroll-play" aria-label="Play/Pause">Play</button>
       </div>
     </section>
   </section>

@@ -552,4 +552,39 @@ footer p {
   font-size:3rem; color:#fff; cursor:pointer;
   user-select:none;
 }
+
+/* ----- Stationary Gallery Viewer ----- */
+.gallery-viewer {
+  text-align: center;
+  margin: 1rem 0 2rem 0;
+}
+.gallery-viewer img {
+  max-width: 90vw;
+  max-height: 70vh;
+  border: 3px solid #00ffe7;
+  border-radius: 8px;
+}
+
+.scroll-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.scroll-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.7rem;
+  scroll-behavior: smooth;
+}
+.scroll-row::-webkit-scrollbar { display: none; }
+.scroll-btn {
+  background: none;
+  border: none;
+  color: #00ffe7;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+.scroll-play { font-size: 1rem; padding: 0 0.3rem; }
 /* --- End Timeless Droid Styles --- */
