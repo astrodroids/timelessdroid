@@ -1,43 +1,47 @@
 // main.js
+
+// Fade in hero tagline
 document.addEventListener('DOMContentLoaded', () => {
   const tagline = document.querySelector('.tagline');
-  tagline.classList.add('visible');  // CSS will transition the opacity
+  if (tagline) tagline.classList.add('visible');
 
-  const viewer = document.getElementById('image-viewer');
-  const viewerImg = document.getElementById('viewer-img');
-  const closeBtn = document.getElementById('viewer-close');
-  document.querySelectorAll('.gallery-thumbs img').forEach(img => {
-    img.addEventListener('click', () => {
-      viewerImg.src = img.dataset.full || img.src;
-      viewer.classList.add('active');
-    });
-  });
-  if (viewer && closeBtn) {
-    viewer.addEventListener('click', (e) => {
-      if (e.target === viewer || e.target === closeBtn) {
-        viewer.classList.remove('active');
-      }
-    });
+  const viewerImg = document.getElementById('viewer-image');
+
+  function showImage(img) {
+    if (viewerImg) viewerImg.src = img.dataset.full || img.src;
   }
-});
-/* ---------- GALLERY LIGHTBOX ---------- */
-const viewer      = document.getElementById('image-viewer');
-const viewerImg   = document.getElementById('viewer-img');
-const viewerClose = document.getElementById('viewer-close');
 
-/* open viewer */
-document.querySelectorAll('.gallery-thumbs img').forEach(img=>{
-  img.addEventListener('click', ()=>{
-    viewerImg.src = img.dataset.full;
-    viewer.classList.add('open');
+  document.querySelectorAll('.scroll-row img').forEach(img => {
+    img.addEventListener('mouseenter', () => showImage(img));
+    img.addEventListener('touchstart', () => showImage(img));
+  });
+
+  document.querySelectorAll('.scroll-container').forEach(container => {
+    const row   = container.querySelector('.scroll-row');
+    const left  = container.querySelector('.scroll-left');
+    const right = container.querySelector('.scroll-right');
+    const play  = container.querySelector('.scroll-play');
+    let auto    = null;
+
+    if (left)  left.addEventListener('click',  () => row.scrollBy({left:-row.clientWidth, behavior:'smooth'}));
+    if (right) right.addEventListener('click', () => row.scrollBy({left: row.clientWidth, behavior:'smooth'}));
+
+    if (play) {
+      play.addEventListener('click', () => {
+        if (auto) {
+          clearInterval(auto);
+          auto = null;
+          play.textContent = 'Play';
+        } else {
+          auto = setInterval(() => {
+            row.scrollBy({left:1});
+            if (row.scrollLeft + row.clientWidth >= row.scrollWidth) {
+              row.scrollLeft = 0;
+            }
+          }, 30);
+          play.textContent = 'Pause';
+        }
+      });
+    }
   });
 });
-
-/* close viewer – X button, overlay click, or ESC key */
-function closeViewer(){
-  viewer.classList.remove('open');
-  viewerImg.src = '';
-}
-viewerClose.addEventListener('click', closeViewer);
-viewer.addEventListener('click', e=>{ if(e.target===viewer) closeViewer(); });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeViewer(); });
