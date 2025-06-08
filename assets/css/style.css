@@ -510,5 +510,46 @@ footer p {
     margin: 0 auto;
   }
 }
+/* ---------- GALLERY GRID ---------- */
+.gallery-thumbs{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:1rem;
+}
 
+/* universal thumb rules */
+.gallery-thumbs img{
+  width:100%;         /* every thumbnail shares the same *width*  */
+  height:100%;        /* grid row height will adapt via aspect-ratio */
+  object-fit:cover;   /* crops without squishing */
+  cursor:pointer;
+  border-radius:8px;
+  transition:transform .25s;
+}
+.gallery-thumbs img:hover{transform:scale(1.04);}
+
+/* natural aspect‑ratio control */
+.img-square    {aspect-ratio:1/1;}
+.img-portrait  {aspect-ratio:9/16;}
+.img-landscape {aspect-ratio:16/9;}
+
+/* ---------- LIGHTBOX ---------- */
+.image-viewer{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;          /* toggled by JS */
+  align-items:center; justify-content:center;
+  z-index:1000;
+}
+.image-viewer.open{display:flex;}  /* JS adds this class */
+
+.image-viewer img{
+  max-width:90vw; max-height:90vh;
+  border-radius:12px;
+}
+.image-viewer .close{
+  position:absolute; top:2rem; right:2rem;
+  font-size:3rem; color:#fff; cursor:pointer;
+  user-select:none;
+}
 /* --- End Timeless Droid Styles --- */
