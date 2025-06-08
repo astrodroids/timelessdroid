@@ -564,6 +564,19 @@ footer p {
   border: 3px solid #00ffe7;
   border-radius: 8px;
 }
+.viewer-controls {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.viewer-btn {
+  background: none;
+  border: none;
+  color: #00ffe7;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
 
 .scroll-container {
   display: flex;
