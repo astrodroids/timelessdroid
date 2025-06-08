@@ -20,3 +20,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+/* ---------- GALLERY LIGHTBOX ---------- */
+const viewer      = document.getElementById('image-viewer');
+const viewerImg   = document.getElementById('viewer-img');
+const viewerClose = document.getElementById('viewer-close');
+
+/* open viewer */
+document.querySelectorAll('.gallery-thumbs img').forEach(img=>{
+  img.addEventListener('click', ()=>{
+    viewerImg.src = img.dataset.full;
+    viewer.classList.add('open');
+  });
+});
+
+/* close viewer – X button, overlay click, or ESC key */
+function closeViewer(){
+  viewer.classList.remove('open');
+  viewerImg.src = '';
+}
+viewerClose.addEventListener('click', closeViewer);
+viewer.addEventListener('click', e=>{ if(e.target===viewer) closeViewer(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeViewer(); });
