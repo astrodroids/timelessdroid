@@ -556,16 +556,4 @@ footer p {
   user-select:none;
 }
 
-/* ----- Stationary Gallery Viewer ----- */
-.gallery-viewer {
-  text-align: center;
-  margin: 1rem 0 2rem 0;
-}
-.gallery-viewer img {
-  max-width: 90vw;
-  max-height: 70vh;
-  border: 3px solid #00ffe7;
-  border-radius: 8px;
-}
-/* removed scrolling and viewer button controls */
 /* --- End Timeless Droid Styles --- */
