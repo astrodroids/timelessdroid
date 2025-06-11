@@ -183,6 +183,11 @@ header {
   box-shadow: 0 0 16px #00ffe766;
   transform: scale(1.07);
 }
+.gallery-thumbs a:focus img {
+  outline: 3px solid #00ffe7;
+  outline-offset: 2px;
+}
+
 .img-square { aspect-ratio: 1 / 1; object-fit: cover; }
 .img-portrait { aspect-ratio: 9 / 16; object-fit: cover; }
 .img-landscape { aspect-ratio: 16 / 9; object-fit: cover; }
