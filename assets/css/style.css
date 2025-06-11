@@ -502,6 +502,14 @@ footer p {
     min-width: 120px;
   }
 }
+@media (max-width: 600px) {
+  #about-teaser img {
+    max-width: 90% !important;
+    height: auto !important;
+    margin: 0 auto;
+    display: block;
+  }
+}
 @media (max-width: 800px) {
   #superagency.flex-row {
     flex-direction: column !important;
