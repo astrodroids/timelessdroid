@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Timeless Droid – AI Art Gallery</title>
 
-  <!-- BASIC SEO META -->
+  <!-- SEO META -->
   <meta name="description" content="Explore the Timeless Droid visual universe – AI-generated art inspired by mythology, machines, and the far future.">
   <meta name="keywords" content="AI art, Timeless Droid gallery, sci-fi artwork, futuristic art, AI-generated images, robot art, cosmic art, @astrodroids visuals, concept art" />
   <meta name="author" content="Timeless Droid / G. Droid" />
@@ -35,7 +35,6 @@
 </head>
 <body>
   <header>
-    <!-- Navigation bar (consistent on all pages) -->
     <nav>
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
@@ -47,50 +46,59 @@
     </nav>
   </header>
 
-<!-- Hero Section -->
-<section id="hero">
-  <!-- Reintroduced logo, positioned via CSS -->
-  <!-- <img src="assets/img/band-logo.jpg" alt="Timeless Droid Logo" class="hero-logo"> -->
-  
-  <!-- Text container for tagline and CTA, will be flex-aligned to bottom -->
-  <div class="hero-text">
-    <p class="tagline">An odyssey that transcends time and space.</p>
-    <!-- CTA button stays at bottom of hero due to flex alignment -->
-    <a href="https://hyperfollow.com/timelessdroid/timeless-droid" class="cta-button">Listen to the Latest Release</a>
-  </div>
-</section>
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="tagline">An odyssey that transcends time and space.</p>
+      <a href="https://hyperfollow.com/timelessdroid/timeless-droid" class="cta-button">Listen to the Latest Release</a>
+    </div>
+  </section>
 
-
-  <!-- Gallery Section (updated content) -->
+  <!-- Gallery Section -->
   <section id="gallery" class="content-section">
     <h2>AI Art Gallery</h2>
     <p>Step into Timeless Droid’s visual dimension – an AI-driven art gallery where fantasy and futurism collide. Each image here is a page from the story, dreamed up by G. Droid’s neural imagination and guided by Rick’s artistic vision. You’ll encounter neon deities, cosmic landscapes, and ancient legends reimagined in digital paint. These artworks aren’t just illustrations; they’re portals. They invite you to see the music and hear the visuals – to experience the Timeless Droid universe with all senses engaged.</p>
-    <p>In this gallery, technology becomes the paintbrush. The AI art pieces evolve from a mix of Rick’s prompts, mythic lore, and the machine’s own creative leaps. One moment you might find a robot sage meditating under a cyberpunk sky, the next an ancient warrior bathed in electric glow. It’s a reflection of what Timeless Droid stands for: bridging epochs and genres to create something profoundly new. Enjoy wandering through these scenes – and keep an eye out for new additions, as the gallery grows with each chapter of the Timeless Droid saga.</p>
-    <div id="gallery-viewer" class="gallery-viewer">
-      <img id="viewer-image" src="assets/img/gallery/square1.jpg" alt="Selected artwork" />
-    </div>
+    <p>In this gallery, technology becomes the paintbrush. The AI art pieces evolve from a mix of Rick’s prompts, mythic lore, and the machine’s own creative leaps. Enjoy wandering through these scenes – and keep an eye out for new additions as the gallery grows with each chapter of the Timeless Droid saga.</p>
     
+    <!-- Square Images -->
     <section class="thumb-section">
       <h3>Square Format (1:1)</h3>
       <div class="gallery-thumbs">
-        <img class="img-square" src="assets/img/gallery/square1.jpg" alt="Square art 1" data-full="assets/img/gallery/square1.jpg" loading="lazy" />
-        <img class="img-square" src="assets/img/gallery/square2.jpg" alt="Square art 2" data-full="assets/img/gallery/square2.jpg" loading="lazy" />
+        <a href="assets/img/gallery/square1.jpg" target="_blank" rel="noopener">
+          <img class="img-square" src="assets/img/gallery/square1.jpg" alt="AI neon deity under cyberpunk sky" loading="lazy" />
+        </a>
+        <a href="assets/img/gallery/square2.jpg" target="_blank" rel="noopener">
+          <img class="img-square" src="assets/img/gallery/square2.jpg" alt="Ancient robot guardian portrait" loading="lazy" />
+        </a>
+        <!-- Add more images as needed -->
       </div>
     </section>
 
+    <!-- Portrait Images -->
     <section class="thumb-section">
       <h3>Portrait Format (9:16)</h3>
       <div class="gallery-thumbs">
-        <img class="img-portrait" src="assets/img/gallery/portrait1.jpg" alt="Portrait art 1" data-full="assets/img/gallery/portrait1.jpg" loading="lazy" />
-        <img class="img-portrait" src="assets/img/gallery/portrait2.jpg" alt="Portrait art 2" data-full="assets/img/gallery/portrait2.jpg" loading="lazy" />
+        <a href="assets/img/gallery/portrait1.jpg" target="_blank" rel="noopener">
+          <img class="img-portrait" src="assets/img/gallery/portrait1.jpg" alt="AI oracle in electric mist" loading="lazy" />
+        </a>
+        <a href="assets/img/gallery/portrait2.jpg" target="_blank" rel="noopener">
+          <img class="img-portrait" src="assets/img/gallery/portrait2.jpg" alt="Futuristic city watcher" loading="lazy" />
+        </a>
+        <!-- Add more images as needed -->
       </div>
     </section>
 
+    <!-- Landscape Images -->
     <section class="thumb-section">
       <h3>Landscape Format (16:9)</h3>
       <div class="gallery-thumbs">
-        <img class="img-landscape" src="assets/img/gallery/landscape1.jpg" alt="Landscape art 1" data-full="assets/img/gallery/landscape1.jpg" loading="lazy" />
-        <img class="img-landscape" src="assets/img/gallery/landscape2.jpg" alt="Landscape art 2" data-full="assets/img/gallery/landscape2.jpg" loading="lazy" />
+        <a href="assets/img/gallery/landscape1.jpg" target="_blank" rel="noopener">
+          <img class="img-landscape" src="assets/img/gallery/landscape1.jpg" alt="Cosmic robot explorer in ruins" loading="lazy" />
+        </a>
+        <a href="assets/img/gallery/landscape2.jpg" target="_blank" rel="noopener">
+          <img class="img-landscape" src="assets/img/gallery/landscape2.jpg" alt="Synthwave-inspired desert vista" loading="lazy" />
+        </a>
+        <!-- Add more images as needed -->
       </div>
     </section>
   </section>
@@ -123,3 +131,4 @@
   <script src="assets/js/main.js"></script>
 </body>
 </html>
+
