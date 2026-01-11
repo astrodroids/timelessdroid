@@ -1,0 +1,7 @@
+{
+  "name": "Timeless Droid AI",
+  "description": "A conversational Native Audio AI interface with real-time Google Search integration using Gemini 3 Flash.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
