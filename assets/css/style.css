@@ -81,7 +81,7 @@ header {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  min-height: 80vh;
+  aspect-ratio: 2047 / 868;
   width: 100%;
   position: relative;
   text-align: center;
