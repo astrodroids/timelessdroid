@@ -5,42 +5,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Timeless Droid – Music Videos & Livestreams</title>
 
-  <!-- BASIC SEO META -->
-  <meta name="description" content="Watch official Timeless Droid music videos, livestream clips, and AI-powered visual stories that echo through time.">
-  <meta name="keywords" content="Timeless Droid videos, music videos, livestreams, AI music video, Sora animations, Timeless Droid YouTube, sci-fi visuals, concept videos" />
+  <meta name="description" content="Watch official Timeless Droid music videos, livestream clips, and AI-powered visual stories.">
+  <meta name="keywords" content="Timeless Droid videos, music videos, AI music video, Sora animations, sci-fi visuals" />
   <meta name="author" content="Timeless Droid / G. Droid" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.timelessdroid.com/videos.html" />
 
-  <!-- OPEN GRAPH -->
   <meta property="og:title" content="Timeless Droid – Music Videos & Livestreams" />
-  <meta property="og:description" content="Experience the Timeless Droid project in motion. Watch music videos and visual transmissions from the @astrodroids universe." />
+  <meta property="og:description" content="Experience the Timeless Droid project in motion." />
   <meta property="og:image" content="https://www.timelessdroid.com/assets/og/og-videos.jpg" />
   <meta property="og:url" content="https://www.timelessdroid.com/videos.html" />
   <meta property="og:type" content="video.other" />
 
-  <!-- TWITTER CARDS -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Timeless Droid – Music Videos & Livestreams" />
-  <meta name="twitter:description" content="Stream official Timeless Droid video content—from AI-driven visuals to sci-fi livestreams." />
-  <meta name="twitter:image" content="https://www.timelessdroid.com/assets/og/og-videos.jpg" />
-  <meta name="twitter:site" content="@astrodroids" />
-
-  <!-- FONTS & STYLES -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon" />
+
+  <style>
+    /* --- VIDEO STAGE LAYOUT --- */
+    .video-stage-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .main-video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      background: #000;
+      border: 1px solid #333;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+
+    .main-video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* --- INFO DECK --- */
+    .video-info-deck {
+      background: rgba(10, 10, 10, 0.6);
+      border-left: 4px solid #e65c00;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .video-info-deck h2 {
+      color: #e65c00;
+      margin-top: 0;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    /* --- VISUAL PLAYLIST GRID --- */
+    .visual-playlist {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .video-card {
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid #333;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-5px);
+      border-color: #e65c00;
+      box-shadow: 0 0 15px rgba(230, 92, 0, 0.2);
+    }
+
+    .video-card img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-meta {
+      padding: 10px;
+    }
+
+    .card-meta h4 {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .card-meta p {
+      margin: 5px 0 0;
+      font-size: 0.8rem;
+      color: #888;
+    }
+  </style>
 </head>
+
 <body>
+
   <header>
-    <!-- Navigation bar (consistent on all pages) -->
     <nav>
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="music.html">Music</a></li>
-        <li><a href="videos.html">Videos</a></li>
+        <li><a href="videos.html" class="active">Videos</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
@@ -48,18 +130,123 @@
   </header>
 
   <main>
-<!-- Hero Section -->
-<section id="hero">
-  <!-- Reintroduced logo, positioned via CSS -->
-  <!-- <img src="assets/img/band-logo.jpg" alt="Timeless Droid Logo" class="hero-logo"> -->
-  
-  <!-- Text container for tagline and CTA, will be flex-aligned to bottom -->
-  <div class="hero-text">
-    <!-- CTA button stays at bottom of hero due to flex alignment -->
-    <a href="https://astro.timelessdroid.com" class="cta-button">Talk To G. Live</a>
-  </div>
-  <p class="tagline">An odyssey that transcends time and space.</p>
-</section>
+    <section id="hero">
+      <div class="hero-text">
+        <a href="https://astro.timelessdroid.com" class="cta-button">Talk To G. Live</a>
+      </div>
+      <p class="tagline">An odyssey that transcends time and space.</p>
+    </section>
+
+    <section class="video-stage-container">
+      
+      <div class="main-video-wrapper">
+        <iframe id="main-frame" 
+          src="https://www.youtube.com/embed/t_882RlA6vA?rel=0" 
+          title="Timeless Droid Video Player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div id="video-details" class="video-info-deck">
+        </div>
+
+      <h3 style="color:#fff; border-bottom:1px solid #333; padding-bottom:10px;">Select Transmission:</h3>
+      
+      <div class="visual-playlist">
+        
+        <div class="video-card" onclick="switchVideo('loop')">
+          <img src="https://img.youtube.com/vi/t_882RlA6vA/hqdefault.jpg" alt="Infinite Loop">
+          <div class="card-meta">
+            <h4>The Infinite Loop</h4>
+            <p>Official Finale Scene</p>
+          </div>
+        </div>
+
+        <div class="video-card" onclick="switchVideo('flux')">
+          <img src="https://img.youtube.com/vi/bRp4bicwrGI/hqdefault.jpg" alt="Fatal Flux">
+          <div class="card-meta">
+            <h4>Fatal Flux</h4>
+            <p>Official Music Video</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <section id="contact" class="contact">
+      <h2>Join the Timeless Droid Universe</h2>
+      <div class="social-icons">
+        <a href="https://www.youtube.com/@timelessdroid" target="_blank"><img src="assets/img/youtube.jpg" alt="YouTube" /></a>
+        <a href="https://www.instagram.com/astrodroids" target="_blank"><img src="assets/img/instagram.jpg" alt="Instagram" /></a>
+        </div>
+      <p>&copy; 2025 Timeless Droid. All rights reserved.</p>
+    </section>
+  </footer>
+
+  <script>
+    // --- VIDEO DATA STORAGE ---
+    const videoData = {
+      'loop': {
+        id: 't_882RlA6vA',
+        title: 'The Infinite Loop (Official Finale)',
+        desc: `
+          <p><strong>You are Part of the Pattern.</strong></p>
+          <p>The final chapter in the Timeless Droid trilogy concludes here—with an encounter beyond space and time. As Rick and G. Droid shake hands with the Timeless Droid, the signal fades, the giants awaken, and the journey continues.</p>
+          <br>
+          <p>🔹 <strong>Music:</strong> “Timeless Droid Part I-III”<br>
+          🔹 <strong>Visuals:</strong> Sora, Final Cut, AI Art Direction<br>
+          🔹 <strong>Royalties Benefit:</strong> Slice Out Hunger 🍕❤️</p>
+          <br>
+          <p><em>"This isn’t just an ending—it’s a transmission encoded with hope."</em></p>
+        `
+      },
+      'flux': {
+        id: 'bRp4bicwrGI',
+        title: 'Fatal Flux (Official Music Video)',
+        desc: `
+          <p><strong>Watch the official music video for "Fatal Flux".</strong></p>
+          <p>The track that started it all. A high-energy collision of classic rock grit and futuristic AI precision.</p>
+          <br>
+          <p>🔹 <strong>Status:</strong> Debut Single<br>
+          🔹 <strong>Mission:</strong> Rock the future.</p>
+        `
+      }
+    };
+
+    // --- FUNCTION TO SWITCH VIDEO ---
+    function switchVideo(videoKey) {
+      const data = videoData[videoKey];
+      const mainFrame = document.getElementById('main-frame');
+      const infoDeck = document.getElementById('video-details');
+
+      // 1. Update Iframe Source
+      mainFrame.src = `https://www.youtube.com/embed/${data.id}?autoplay=1&rel=0`;
+
+      // 2. Update Info Text
+      infoDeck.innerHTML = `
+        <h2>${data.title}</h2>
+        <div class="description-text">${data.desc}</div>
+      `;
+
+      // Scroll smoothly to top of player
+      document.querySelector('.video-stage-container').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // --- INITIAL LOAD ---
+    // Load the first video's data into the text box on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const infoDeck = document.getElementById('video-details');
+      const data = videoData['loop']; // Default video
+      infoDeck.innerHTML = `
+        <h2>${data.title}</h2>
+        <div class="description-text">${data.desc}</div>
+      `;
+    });
+  </script>
 
   <!-- Video Section -->
   <section id="latest-video" class="content-section">
