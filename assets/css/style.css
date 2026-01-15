@@ -120,19 +120,20 @@ header {
   font-weight: 700;
   font-size: 1.1rem;
   padding: 0.85rem 1.7rem;
-  color: #000;
-  background: #ffaa00;
+  color: #fff;             /* Changed to White for pop */
+  background: #e65c00;     /* Darker Orange for contrast */
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: none;   /* Keeps the underline off */
   transition: box-shadow 0.2s, transform 0.2s;
-  box-shadow: 0 0 10px #ffaa00b0;
+  box-shadow: 0 0 10px #e65c00b0; /* Updated glow to match */
 }
+
 #hero .cta-button:hover,
 #hero .cta-button:focus {
-  box-shadow: 0 0 20px #ffaa00, 0 0 30px #ffaa00b0;
-  background: #ffc045;
+  box-shadow: 0 0 20px #e65c00, 0 0 30px #e65c00b0;
+  background: #ff7e1f;     /* Lighter orange on hover */
   transform: scale(1.04);
 }
 
