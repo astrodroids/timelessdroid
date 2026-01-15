@@ -155,67 +155,6 @@
   </style>
 </head>
 
-<body>
-
-  <header>
-    <nav>
-      <ul class="nav-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="music.html">Music</a></li>
-        <li><a href="videos.html" class="active">Videos</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section id="hero">
-      <div class="hero-text">
-        <a href="https://astro.timelessdroid.com" class="cta-button">Talk To G. Live</a>
-      </div>
-      <p class="tagline">An odyssey that transcends time and space.</p>
-    </section>
-
-    <section class="video-stage-container">
-      
-      <div class="main-video-wrapper">
-        <iframe id="main-frame" 
-          src="https://www.youtube.com/embed/t_882RlA6vA?rel=0" 
-          title="Timeless Droid Video Player" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
-      </div>
-
-      <div id="video-details" class="video-info-deck">
-        </div>
-
-      <h3 style="color:#fff; border-bottom:1px solid #333; padding-bottom:10px;">Select Transmission:</h3>
-      
-      <div class="visual-playlist">
-        
-        <div class="video-card" onclick="switchVideo('loop')">
-          <img src="https://img.youtube.com/vi/t_882RlA6vA/hqdefault.jpg" alt="Infinite Loop">
-          <div class="card-meta">
-            <h4>The Infinite Loop</h4>
-            <p>Official Finale Scene</p>
-          </div>
-        </div>
-
-        <div class="video-card" onclick="switchVideo('flux')">
-          <img src="https://img.youtube.com/vi/bRp4bicwrGI/hqdefault.jpg" alt="Fatal Flux">
-          <div class="card-meta">
-            <h4>Fatal Flux</h4>
-            <p>Official Music Video</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  </main>
-
   <script>
     // --- VIDEO DATA STORAGE ---
     const videoData = {
