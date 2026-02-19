@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G. Droid Factory Log</title>
+    <style>
+        body { background: #0f0f0f; color: #00ffcc; font-family: 'Courier New', Courier, monospace; padding: 20px; }
+        h1 { border-bottom: 2px solid #00ffcc; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #333; padding: 12px; text-align: left; }
+        th { background: #1a1a1a; color: #ff00ff; }
+        tr:nth-child(even) { background: #141414; }
+        .timestamp { color: #888; font-size: 0.8em; }
+        img { width: 100px; border-radius: 5px; border: 1px solid #00ffcc; }
+    </style>
+</head>
+<body>
+    <h1>SYSTEM LOG: Timeless Droid Cloud Factory</h1>
+    <p>Operational Status: <span style="color: lime;">ONLINE</span></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Asset Type</th>
+                <th>Image Preview</th>
+                <th>Lore Verse / Oracle Seed</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="log-body">
+            <tr>
+                <td class="timestamp">2026-02-19 16:00</td>
+                <td>System Initialized</td>
+                <td>N/A</td>
+                <td>"The Law is for All."</td>
+                <td>SUCCESS</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
