@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot FPS Starter</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-family: sans-serif;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        Use WASD to Move | Mouse to Look | Click to Shoot (Placeholder)
+    </div>
+
+    <!-- Load Three.js and Cannon.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.158.0/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+
+    <script>
+        // --- 1. SETUP SCENE ---
+        let scene, camera, renderer, world;
+        let controls = {
+            moveForward: false,
+            moveBackward: false,
+            moveLeft: false,
+            moveRight: false,
+            canJump: true
+        };
+
+        const velocity = new THREE.Vector3();
+        const direction = new THREE.Vector3();
+        const speed = 5.0;
+        const jumpStrength = 10;
+
+        init();
+        animate();
+
+        function init() {
+            // --- Three.js Setup ---
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x87ceeb); // Sky blue background
+            scene.fog = new THREE.Fog(0x87ceeb, 0, 100);
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.y = 1.7; // Standard human height, but for a robot, adjust this!
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Lighting
+            const light = new THREE.HemisphereLight(0xeeeeff, 0x777788, 1);
+            scene.add(light);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+            dirLight.position.set(10, 20, 10);
+            scene.add(dirLight);
+
+            // --- Cannon.js (Physics) Setup ---
+            world = new CANNON.World();
+            world.gravity.set(0, -20, 0); // Stronger gravity for better feel
+
+            // Ground Plane
+            const groundShape = new CANNON.Plane();
+            const groundBody = new CANNON.Body({ mass: 0, shape: groundShape });
+            groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+            world.addBody(groundBody);
+
+            const groundMesh = new THREE.Mesh(
+                new THREE.PlaneGeometry(100, 100),
+                new THREE.MeshPhongMaterial({ color: 0x33aa33, side: THREE.DoubleSide })
+            );
+            groundMesh.rotation.x = -Math.PI / 2;
+            scene.add(groundMesh);
+
+            // --- Robot/Player Body (Simplified) ---
+            // In a real game, this would be a complex robot model.
+            // Here, we use a simple capsule to represent the robot's physical body.
+            const robotShape = new CANNON.Sphere(0.5); // Simple sphere for now
+            const robotBody = new CANNON.Body({ mass: 50, shape: robotShape });
+            robotBody.position.set(0, 5, 0);
+            world.addBody(robotBody);
+
+            // --- Controls ---
+            setupControls();
+
+            // Handle window resizing
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function setupControls() {
+            document.addEventListener('keydown', (event) => {
+                switch (event.code) {
+                    case 'KeyW': controls.moveForward = true; break;
+                    case 'KeyS': controls.moveBackward = true; break;
+                    case 'KeyA': controls.moveLeft = true; break;
+                    case 'KeyD': controls.moveRight = true; break;
+                    case 'Space': if (controls.canJump) {
+                        // Apply impulse for jumping
+                        robotBody.velocity.y = jumpStrength;
+                        controls.canJump = false;
+                    }
+                    break;
+                }
+            });
+
+            document.addEventListener('keyup', (event) => {
+                switch (event.code) {
+                    case 'KeyW': controls.moveForward = false; break;
+                    case 'KeyS': controls.moveBackward = false; break;
+                    case 'KeyA': controls.moveLeft = false; break;
+                    case 'KeyD': controls.moveRight = false; break;
+                }
+            });
+
+            // Mouse Look (Simplified: We'll use Pointer Lock API for true FPS feel)
+            document.body.addEventListener('click', () => {
+                renderer.domElement.requestPointerLock();
+            });
+
+            document.addEventListener('mousemove', (event) => {
+                if (document.pointerLockElement === renderer.domElement) {
+                    // Rotate the camera based on mouse movement
+                    camera.rotation.y -= event.movementX * 0.002;
+                    camera.rotation.x -= event.movementY * 0.002;
+                    // Clamp vertical rotation to prevent flipping
+                    camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
+                }
+            });
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // --- 2. GAME LOOP ---
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Step the physics world
+            world.step(1 / 60);
+
+            // --- Movement Logic ---
+            handleMovement();
+
+            // --- Sync Visuals with Physics ---
+            // In a real game, the camera would be attached to the robot mesh.
+            // Here, we move the camera based on the robot's position and rotation.
+            camera.position.copy(robotBody.position);
+            camera.quaternion.copy(robotBody.quaternion);
+
+            // Render the scene
+            renderer.render(scene, camera);
+        }
+
+        function handleMovement() {
+            // Calculate direction based on camera orientation (for FPS feel)
+            direction.z = Number(controls.moveForward) - Number(controls.moveBackward);
+            direction.x = Number(controls.moveRight) - Number(controls.moveLeft);
+            direction.normalize(); // Keep speed constant
+
+            if (controls.moveForward || controls.moveBackward) {
+                // Move along the camera's forward vector
+                camera.translateZ(-direction.z * speed * 0.1);
+            }
+            if (controls.moveLeft || controls.moveRight) {
+                // Move along the camera's right vector
+                camera.translateX(direction.x * speed * 0.1);
+            }
+
+            // NOTE: For a true physics-based FPS, you would apply forces to the robotBody
+            // instead of directly manipulating the camera position.
+            // The current implementation uses direct camera manipulation for simplicity.
+        }
+
+    </script>
+</body>
+</html>
