@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kinetic Strings & Drums</title>
+  <style>
+    :root {
+      --bg: #0a0c10;
+      --panel: rgba(20, 24, 33, 0.72);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --accent: #38bdf8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+    }
+
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      cursor: crosshair;
+    }
+
+    /* Minimal Top Floating Pill */
+    .hud {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      z-index: 10;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .hud button {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hud button:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .hud button.active {
+      background: rgba(56, 189, 248, 0.16);
+      border-color: rgba(56, 189, 248, 0.45);
+      color: #7dd3fc;
+    }
+
+    .divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+      margin: 0 2px;
+    }
+
+    .hint {
+      position: fixed;
+      top: 68px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+      text-align: center;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hud">
+    <button id="btnPulse" class="active" title="Toggle kinetic orb emitter">
+      <span class="dot" style="background:#38bdf8; box-shadow:0 0 8px #38bdf8;"></span>
+      Pulse Stream
+    </button>
+    <div class="divider"></div>
+    <button id="btnAddKick" title="Add Kick Circle">+ Kick</button>
+    <button id="btnAddSnare" title="Add Snare Triangle">+ Snare</button>
+    <button id="btnAddHat" title="Add Hi-Hat Diamond">+ Hat</button>
+    <div class="divider"></div>
+    <button id="btnClearStaff" title="Clear Sheet Music">Clear Staff</button>
+  </div>
+
+  <div id="hint" class="hint">
+    Strum strings • Drag geometric drums • Double-click to launch an orb
+  </div>
+
+  <canvas id="stage"></canvas>
+
+  <script>
+    const canvas = document.getElementById('stage');
+    const ctx = canvas.getContext('2d');
+    const hintEl = document.getElementById('hint');
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    // Layout Regions
+    let staffAreaTop = height * 0.74;
+
+    // Web Audio API Context
+    let audioCtx = null;
+    function ensureAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    // Guitar Strings Configuration (High E4 down to Low E2)
+    // staffStep: steps relative to bottom treble staff line (E4 = 0, D4 = -1, C4 = -2, etc.)
+    const
