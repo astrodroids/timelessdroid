@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Kinetic Strings & Drums</title>
   <style>
     :root {
@@ -20,6 +20,7 @@
       padding: 0;
       user-select: none;
       -webkit-user-select: none;
+      -webkit-touch-callout: none;
     }
 
     body, html {
@@ -29,6 +30,7 @@
       background-color: var(--bg);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: var(--text);
+      overscroll-behavior: none;
     }
 
     canvas {
@@ -36,17 +38,18 @@
       width: 100vw;
       height: 100vh;
       cursor: crosshair;
+      touch-action: none;
     }
 
     /* Minimal Top Floating Pill */
     .hud {
       position: fixed;
-      top: 18px;
+      top: 14px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       padding: 6px 12px;
       background: var(--panel);
       backdrop-filter: blur(12px);
@@ -55,6 +58,9 @@
       border-radius: 999px;
       z-index: 10;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+      white-space: nowrap;
+      max-width: 96vw;
+      overflow-x: auto;
     }
 
     .hud button {
@@ -71,11 +77,16 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      touch-action: manipulation;
     }
 
     .hud button:hover {
       background: rgba(255, 255, 255, 0.07);
       border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .hud button:active {
+      transform: scale(0.95);
     }
 
     .hud button.active {
@@ -89,11 +100,12 @@
       height: 16px;
       background: var(--border);
       margin: 0 2px;
+      flex-shrink: 0;
     }
 
     .hint {
       position: fixed;
-      top: 68px;
+      top: 60px;
       left: 50%;
       transform: translateX(-50%);
       font-size: 12px;
@@ -102,6 +114,7 @@
       pointer-events: none;
       transition: opacity 0.6s ease;
       text-align: center;
+      white-space: nowrap;
     }
 
     .dot {
@@ -116,7 +129,7 @@
 
   <div class="hud">
     <button id="btnPulse" class="active" title="Toggle kinetic orb emitter">
-      <span class="dot" style="background:#38bdf8; box-shadow:0 0 8px #38bdf8;"></span>
+      <span class="dot" id="pulseDot" style="background:#38bdf8; box-shadow:0 0 8px #38bdf8;"></span>
       Pulse Stream
     </button>
     <div class="divider"></div>
@@ -128,7 +141,7 @@
   </div>
 
   <div id="hint" class="hint">
-    Strum strings • Drag geometric drums • Double-click to launch an orb
+    Strum strings • Drag geometric drums • Double-tap to launch an orb
   </div>
 
   <canvas id="stage"></canvas>
@@ -140,15 +153,25 @@
 
     let width = window.innerWidth;
     let height = window.innerHeight;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     // Layout Regions
     let staffAreaTop = height * 0.74;
 
     // Web Audio API Context
     let audioCtx = null;
+    let noiseBuffer = null;
+
     function ensureAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // Pre-build noise buffer for snare and hi-hat
+        const bufferSize = audioCtx.sampleRate * 0.5;
+        noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
       }
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
@@ -157,4 +180,642 @@
 
     // Guitar Strings Configuration (High E4 down to Low E2)
     // staffStep: steps relative to bottom treble staff line (E4 = 0, D4 = -1, C4 = -2, etc.)
-    const
+    const STRING_CONFIG = [
+      { name: 'E4', freq: 329.63, color: '#38bdf8', staffStep: 0 },
+      { name: 'B3', freq: 246.94, color: '#818cf8', staffStep: -3 },
+      { name: 'G3', freq: 196.00, color: '#a78bfa', staffStep: -5 },
+      { name: 'D3', freq: 146.83, color: '#c084fc', staffStep: -8 },
+      { name: 'A2', freq: 110.00, color: '#e879f9', staffStep: -11 },
+      { name: 'E2', freq: 82.41,  color: '#f472b6', staffStep: -14 }
+    ];
+
+    let strings = [];
+    let drums = [];
+    let orbs = [];
+    let ripples = [];
+    let staffNotes = [];
+
+    let pulseActive = true;
+    let lastEmitTime = 0;
+    const EMIT_INTERVAL = 1400; // ms between stream orbs
+
+    // Build / Resize Stage Layout
+    function layoutStage() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      staffAreaTop = height * 0.74;
+
+      const stringZoneTop = Math.max(95, height * 0.24);
+      const stringZoneBottom = staffAreaTop - 28;
+      const span = Math.max(100, stringZoneBottom - stringZoneTop);
+      const marginX = Math.max(28, width * 0.08);
+
+      if (strings.length === 0) {
+        strings = STRING_CONFIG.map((cfg, idx) => ({
+          ...cfg,
+          x1: marginX,
+          x2: width - marginX,
+          y: stringZoneTop + (span / (STRING_CONFIG.length - 1)) * idx,
+          amp: 0,
+          vel: 0,
+          phase: 0,
+          cooldown: 0
+        }));
+      } else {
+        strings.forEach((s, idx) => {
+          s.x1 = marginX;
+          s.x2 = width - marginX;
+          s.y = stringZoneTop + (span / (STRING_CONFIG.length - 1)) * idx;
+        });
+      }
+
+      // Initialize default geometric drums if none exist yet
+      if (drums.length === 0) {
+        const midY = (stringZoneTop + stringZoneBottom) * 0.45;
+        drums.push(
+          { type: 'kick',  x: width * 0.36, y: midY - 25, r: 22, color: '#f97316', pulse: 0, angle: 0 },
+          { type: 'snare', x: width * 0.52, y: midY + 15, r: 22, color: '#10b981', pulse: 0, angle: 0.2 },
+          { type: 'hat',   x: width * 0.66, y: midY - 10, r: 19, color: '#eab308', pulse: 0, angle: 0 }
+        );
+      } else {
+        drums.forEach(d => {
+          d.x = Math.min(Math.max(d.r + 10, d.x), width - d.r - 10);
+          d.y = Math.min(Math.max(85, d.y), staffAreaTop - d.r - 12);
+        });
+      }
+    }
+
+    // --- Web Audio Synthesizers ---
+    function playStringSound(str, intensity = 1) {
+      ensureAudio();
+      if (!audioCtx) return;
+
+      const now = audioCtx.currentTime;
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const filter = audioCtx.createBiquadFilter();
+      const gain = audioCtx.createGain();
+
+      osc1.type = 'triangle';
+      osc2.type = 'sawtooth';
+      osc1.frequency.setValueAtTime(str.freq, now);
+      osc2.frequency.setValueAtTime(str.freq * 1.002, now);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(str.freq * 6, now);
+      filter.frequency.exponentialRampToValueAtTime(str.freq * 1.5, now + 1.4);
+
+      const vol = Math.min(0.28, 0.12 + intensity * 0.12);
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(vol, now + 0.012);
+      gain.gain.exponentialRampToValueAtTime(0.0008, now + 1.8);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + 1.85);
+      osc2.stop(now + 1.85);
+    }
+
+    function playDrumSound(type) {
+      ensureAudio();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+
+      if (type === 'kick') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(145, now);
+        osc.frequency.exponentialRampToValueAtTime(36, now + 0.14);
+
+        gain.gain.setValueAtTime(0.55, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.4);
+      } else if (type === 'snare') {
+        // Tone body
+        const osc = audioCtx.createOscillator();
+        const oscGain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(185, now);
+        osc.frequency.exponentialRampToValueAtTime(85, now + 0.1);
+        oscGain.gain.setValueAtTime(0.25, now);
+        oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        osc.connect(oscGain);
+        oscGain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.15);
+
+        // Crisp snare wires
+        if (noiseBuffer) {
+          const noise = audioCtx.createBufferSource();
+          noise.buffer = noiseBuffer;
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'highpass';
+          filter.frequency.setValueAtTime(900, now);
+          const nGain = audioCtx.createGain();
+          nGain.gain.setValueAtTime(0.32, now);
+          nGain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          noise.connect(filter);
+          filter.connect(nGain);
+          nGain.connect(audioCtx.destination);
+          noise.start(now);
+          noise.stop(now + 0.23);
+        }
+      } else if (type === 'hat') {
+        if (noiseBuffer) {
+          const noise = audioCtx.createBufferSource();
+          noise.buffer = noiseBuffer;
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'highpass';
+          filter.frequency.setValueAtTime(6500, now);
+          const nGain = audioCtx.createGain();
+          nGain.gain.setValueAtTime(0.22, now);
+          nGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          noise.connect(filter);
+          filter.connect(nGain);
+          nGain.connect(audioCtx.destination);
+          noise.start(now);
+          noise.stop(now + 0.09);
+        }
+      }
+    }
+
+    // --- Notation Staff Helpers ---
+    function recordStaffNote(staffStep, color, isDrum = false, drumType = '') {
+      const startX = Math.min(width - 40, 90 + staffNotes.length * 26);
+      // Scroll left if staff gets full
+      if (startX >= width - 50) {
+        staffNotes.forEach(n => { n.x -= 26; });
+        staffNotes = staffNotes.filter(n => n.x > 65);
+      }
+      const nextX = Math.min(width - 50, 90 + staffNotes.length * 26);
+      staffNotes.push({
+        x: nextX,
+        step: staffStep,
+        color,
+        isDrum,
+        drumType,
+        alpha: 1,
+        scale: 1.5
+      });
+    }
+
+    function triggerString(s, impactVel = 8, hitX = width * 0.5) {
+      if (s.cooldown > 0) return;
+      s.amp = Math.min(26, Math.max(8, Math.abs(impactVel) * 2.2));
+      s.vel = 0;
+      s.phase = 0;
+      s.cooldown = 8;
+
+      playStringSound(s, Math.min(1.5, Math.abs(impactVel) / 8));
+      recordStaffNote(s.staffStep, s.color, false);
+
+      ripples.push({
+        x: Math.min(Math.max(s.x1, hitX), s.x2),
+        y: s.y,
+        r: 4,
+        maxR: 34,
+        color: s.color,
+        alpha: 0.85
+      });
+    }
+
+    function triggerDrum(d) {
+      d.pulse = 1;
+      playDrumSound(d.type);
+
+      const stepMap = { kick: -10, snare: -4, hat: 2 };
+      recordStaffNote(stepMap[d.type] ?? -4, d.color, true, d.type);
+
+      ripples.push({
+        x: d.x,
+        y: d.y,
+        r: d.r,
+        maxR: d.r + 42,
+        color: d.color,
+        alpha: 0.9
+      });
+    }
+
+    function spawnOrb(x, y, vx = (Math.random() - 0.5) * 2.2, vy = 1.2) {
+      orbs.push({
+        x,
+        y,
+        prevY: y,
+        vx,
+        vy,
+        r: 7,
+        color: '#38bdf8',
+        bounces: 0,
+        trail: []
+      });
+      if (orbs.length > 25) orbs.shift();
+    }
+
+    // --- HUD Button Listeners ---
+    const btnPulse = document.getElementById('btnPulse');
+    const pulseDot = document.getElementById('pulseDot');
+
+    btnPulse.addEventListener('click', () => {
+      ensureAudio();
+      pulseActive = !pulseActive;
+      btnPulse.classList.toggle('active', pulseActive);
+      pulseDot.style.background = pulseActive ? '#38bdf8' : '#64748b';
+      pulseDot.style.boxShadow = pulseActive ? '0 0 8px #38bdf8' : 'none';
+      if (pulseActive) {
+        spawnOrb(width * 0.5 + (Math.random() - 0.5) * 140, 56);
+        lastEmitTime = performance.now();
+      }
+    });
+
+    function addDrumNode(type) {
+      ensureAudio();
+      const colors = { kick: '#f97316', snare: '#10b981', hat: '#eab308' };
+      const radii = { kick: 22, snare: 22, hat: 19 };
+      const d = {
+        type,
+        x: width * (0.3 + Math.random() * 0.4),
+        y: Math.max(95, (staffAreaTop - 100) * (0.35 + Math.random() * 0.4)),
+        r: radii[type],
+        color: colors[type],
+        pulse: 0,
+        angle: 0
+      };
+      drums.push(d);
+      triggerDrum(d);
+    }
+
+    document.getElementById('btnAddKick').addEventListener('click', () => addDrumNode('kick'));
+    document.getElementById('btnAddSnare').addEventListener('click', () => addDrumNode('snare'));
+    document.getElementById('btnAddHat').addEventListener('click', () => addDrumNode('hat'));
+
+    document.getElementById('btnClearStaff').addEventListener('click', () => {
+      ensureAudio();
+      staffNotes = [];
+    });
+
+    // --- Pointer / Touch Interaction (Strumming, Dragging Drums, Double-Tap Orb) ---
+    let activePointerId = null;
+    let draggedDrum = null;
+    let pointerX = 0;
+    let pointerY = 0;
+    let prevPointerY = 0;
+    let lastTapTime = 0;
+    let lastTapX = 0;
+    let lastTapY = 0;
+
+    canvas.addEventListener('pointerdown', (e) => {
+      ensureAudio();
+      if (hintEl.style.opacity !== '0') {
+        hintEl.style.opacity = '0';
+      }
+
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Check for double-tap / double-click to launch an orb
+      const now = performance.now();
+      const tapDist = Math.hypot(x - lastTapX, y - lastTapY);
+      if (now - lastTapTime < 320 && tapDist < 40) {
+        spawnOrb(x, y, (Math.random() - 0.5) * 3, -2.5);
+        ripples.push({ x, y, r: 4, maxR: 36, color: '#38bdf8', alpha: 0.9 });
+        lastTapTime = 0;
+        return;
+      }
+      lastTapTime = now;
+      lastTapX = x;
+      lastTapY = y;
+
+      activePointerId = e.pointerId;
+      pointerX = x;
+      pointerY = y;
+      prevPointerY = y;
+
+      // Check if grabbing a drum
+      for (let i = drums.length - 1; i >= 0; i--) {
+        const d = drums[i];
+        if (Math.hypot(x - d.x, y - d.y) <= d.r + 14) {
+          draggedDrum = d;
+          triggerDrum(d);
+          return;
+        }
+      }
+
+      // Check if tapping directly on a string
+      strings.forEach(s => {
+        if (x >= s.x1 && x <= s.x2 && Math.abs(y - s.y) < 14) {
+          triggerString(s, 9, x);
+        }
+      });
+    });
+
+    canvas.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== activePointerId) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      if (draggedDrum) {
+        draggedDrum.x = Math.min(Math.max(draggedDrum.r + 10, x), width - draggedDrum.r - 10);
+        draggedDrum.y = Math.min(Math.max(80, y), staffAreaTop - draggedDrum.r - 10);
+      } else {
+        // Strum strings crossed by finger/cursor
+        strings.forEach(s => {
+          if (x >= s.x1 && x <= s.x2) {
+            const crossedDown = prevPointerY < s.y && y >= s.y;
+            const crossedUp = prevPointerY > s.y && y <= s.y;
+            if (crossedDown || crossedUp) {
+              const vel = Math.min(16, Math.max(6, Math.abs(y - prevPointerY)));
+              triggerString(s, vel, x);
+            }
+          }
+        });
+      }
+
+      prevPointerY = y;
+      pointerX = x;
+      pointerY = y;
+    });
+
+    function endPointer(e) {
+      if (e.pointerId === activePointerId) {
+        activePointerId = null;
+        draggedDrum = null;
+      }
+    }
+    canvas.addEventListener('pointerup', endPointer);
+    canvas.addEventListener('pointercancel', endPointer);
+
+    window.addEventListener('resize', layoutStage);
+    layoutStage();
+
+    // --- Main Physics & Render Loop ---
+    function animate(now) {
+      requestAnimationFrame(animate);
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Emit Pulse Stream orbs
+      if (pulseActive && now - lastEmitTime > EMIT_INTERVAL) {
+        const emitX = width * 0.5 + Math.sin(now * 0.0013) * (width * 0.22);
+        spawnOrb(emitX, 54, (Math.random() - 0.5) * 1.8, 1.0);
+        lastEmitTime = now;
+      }
+
+      // Draw & update guitar strings
+      strings.forEach(s => {
+        if (s.cooldown > 0) s.cooldown--;
+        if (s.amp > 0.05) {
+          s.phase += 0.45;
+          s.amp *= 0.93;
+        } else {
+          s.amp = 0;
+        }
+
+        const midX = (s.x1 + s.x2) * 0.5;
+        const offset = Math.sin(s.phase) * s.amp;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(s.x1, s.y);
+        ctx.quadraticCurveTo(midX, s.y + offset, s.x2, s.y);
+        ctx.strokeStyle = s.amp > 0.5 ? s.color : 'rgba(226, 232, 240, 0.25)';
+        ctx.lineWidth = s.amp > 0.5 ? 2.4 : 1.3;
+        if (s.amp > 0.5) {
+          ctx.shadowColor = s.color;
+          ctx.shadowBlur = 12;
+        }
+        ctx.stroke();
+        ctx.restore();
+
+        // String end pins & tuning labels
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.5)';
+        ctx.font = '10px sans-serif';
+        ctx.fillText(s.name, s.x1 - 22, s.y + 3);
+
+        ctx.beginPath();
+        ctx.arc(s.x1, s.y, 2.5, 0, Math.PI * 2);
+        ctx.arc(s.x2, s.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = s.color;
+        ctx.fill();
+      });
+
+      // Draw & update geometric drums
+      drums.forEach(d => {
+        d.pulse *= 0.88;
+        d.angle += 0.006;
+        const rad = d.r + d.pulse * 6;
+
+        ctx.save();
+        ctx.translate(d.x, d.y);
+        ctx.rotate(d.angle);
+        ctx.strokeStyle = d.color;
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+        ctx.lineWidth = 2.2;
+        ctx.shadowColor = d.color;
+        ctx.shadowBlur = 10 + d.pulse * 14;
+
+        ctx.beginPath();
+        if (d.type === 'kick') {
+          ctx.arc(0, 0, rad, 0, Math.PI * 2);
+        } else if (d.type === 'snare') {
+          for (let i = 0; i < 3; i++) {
+            const a = (i * Math.PI * 2) / 3 - Math.PI / 2;
+            const px = Math.cos(a) * (rad * 1.15);
+            const py = Math.sin(a) * (rad * 1.15);
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+          }
+          ctx.closePath();
+        } else if (d.type === 'hat') {
+          for (let i = 0; i < 4; i++) {
+            const a = (i * Math.PI) / 2;
+            const px = Math.cos(a) * (rad * 1.15);
+            const py = Math.sin(a) * (rad * 1.15);
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+          }
+          ctx.closePath();
+        }
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+      });
+
+      // Update & draw kinetic orbs
+      for (let i = orbs.length - 1; i >= 0; i--) {
+        const o = orbs[i];
+        o.prevY = o.y;
+        o.vy += 0.16; // Gravity
+        o.x += o.vx;
+        o.y += o.vy;
+
+        // Trail history
+        o.trail.push({ x: o.x, y: o.y });
+        if (o.trail.length > 10) o.trail.shift();
+
+        // Wall bounce
+        if (o.x < o.r || o.x > width - o.r) {
+          o.vx *= -0.85;
+          o.x = Math.min(Math.max(o.r, o.x), width - o.r);
+        }
+
+        // Collide with geometric drums
+        drums.forEach(d => {
+          const dx = o.x - d.x;
+          const dy = o.y - d.y;
+          const dist = Math.hypot(dx, dy);
+          const minDist = o.r + d.r;
+          if (dist < minDist && dist > 0.001) {
+            const nx = dx / dist;
+            const ny = dy / dist;
+            o.x = d.x + nx * (minDist + 1);
+            o.y = d.y + ny * (minDist + 1);
+            const speed = Math.max(4.5, Math.hypot(o.vx, o.vy) * 0.92);
+            o.vx = nx * speed + (Math.random() - 0.5) * 0.8;
+            o.vy = ny * speed;
+            o.color = d.color;
+            o.bounces++;
+            triggerDrum(d);
+          }
+        });
+
+        // Cross guitar strings
+        strings.forEach(s => {
+          if (o.x >= s.x1 && o.x <= s.x2) {
+            const crossedDown = o.prevY < s.y && o.y >= s.y;
+            const crossedUp = o.prevY > s.y && o.y <= s.y;
+            if (crossedDown || crossedUp) {
+              triggerString(s, o.vy, o.x);
+              o.color = s.color;
+            }
+          }
+        });
+
+        // Draw orb trail
+        for (let t = 0; t < o.trail.length; t++) {
+          const pt = o.trail[t];
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, o.r * (t / o.trail.length) * 0.8, 0, Math.PI * 2);
+          ctx.fillStyle = o.color;
+          ctx.globalAlpha = (t / o.trail.length) * 0.35;
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+
+        // Draw orb body
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = o.color;
+        ctx.shadowBlur = 14;
+        ctx.fill();
+        ctx.restore();
+
+        // Remove orbs once they enter the bottom sheet music area
+        if (o.y > staffAreaTop || o.bounces > 14) {
+          orbs.splice(i, 1);
+        }
+      }
+
+      // Update & draw ripples
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const rp = ripples[i];
+        rp.r += (rp.maxR - rp.r) * 0.16;
+        rp.alpha *= 0.88;
+        ctx.beginPath();
+        ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+        ctx.strokeStyle = rp.color;
+        ctx.globalAlpha = rp.alpha;
+        ctx.lineWidth = 1.6;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+        if (rp.alpha < 0.03) ripples.splice(i, 1);
+      }
+
+      // --- Draw Live Sheet Music Staff at Bottom ---
+      ctx.fillStyle = 'rgba(13, 17, 23, 0.88)';
+      ctx.fillRect(0, staffAreaTop, width, height - staffAreaTop);
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, staffAreaTop);
+      ctx.lineTo(width, staffAreaTop);
+      ctx.stroke();
+
+      const staffSpacing = Math.min(11, (height - staffAreaTop) / 11);
+      const bottomTrebleLineY = staffAreaTop + staffSpacing * 5.2;
+
+      // 5 Staff Lines
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.22)';
+      for (let i = 0; i < 5; i++) {
+        const ly = bottomTrebleLineY - i * staffSpacing;
+        ctx.beginPath();
+        ctx.moveTo(36, ly);
+        ctx.lineTo(width - 36, ly);
+        ctx.stroke();
+      }
+
+      // Clef label
+      ctx.fillStyle = 'rgba(148, 163, 184, 0.45)';
+      ctx.font = '22px serif';
+      ctx.fillText('𝄞', 44, bottomTrebleLineY - staffSpacing * 0.8);
+
+      // Draw plotted notes on staff
+      staffNotes.forEach(n => {
+        n.scale += (1 - n.scale) * 0.2;
+        const ny = bottomTrebleLineY - n.step * (staffSpacing * 0.5);
+
+        ctx.save();
+        ctx.translate(n.x, ny);
+        ctx.scale(n.scale, n.scale);
+        ctx.fillStyle = n.color;
+        ctx.strokeStyle = n.color;
+        ctx.shadowColor = n.color;
+        ctx.shadowBlur = 8;
+
+        if (n.isDrum) {
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          ctx.moveTo(-4, -4);
+          ctx.lineTo(4, 4);
+          ctx.moveTo(4, -4);
+          ctx.lineTo(-4, 4);
+          ctx.stroke();
+        } else {
+          ctx.beginPath();
+          ctx.ellipse(0, 0, 5.5, 4, -0.3, 0, Math.PI * 2);
+          ctx.fill();
+          // Note stem
+          ctx.lineWidth = 1.4;
+          ctx.beginPath();
+          ctx.moveTo(4.8, 0);
+          ctx.lineTo(4.8, -20);
+          ctx.stroke();
+        }
+        ctx.restore();
+      });
+    }
+
+    requestAnimationFrame(animate);
+  </script>
+</body>
+</html>
