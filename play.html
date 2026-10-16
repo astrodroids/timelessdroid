@@ -12,6 +12,7 @@
       --accent-amber: #ffae00;
       --accent-red: #ff2a5f;
       --accent-blue: #2aa8ff;
+      --accent-green: #00ffaa;
       --text-main: #e6f4ff;
       --text-dim: #7f9bb8;
       --app-height: 100dvh;
@@ -70,6 +71,25 @@
       color: var(--border-cyan);
       text-shadow: 0 0 10px rgba(0, 240, 255, 0.55);
       white-space: nowrap;
+    }
+
+    .gamepad-pill {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(127, 155, 184, 0.35);
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.04);
+      white-space: nowrap;
+    }
+
+    .gamepad-pill.connected {
+      color: var(--accent-green);
+      border-color: rgba(0, 255, 170, 0.6);
+      background: rgba(0, 255, 170, 0.12);
+      box-shadow: 0 0 8px rgba(0, 255, 170, 0.3);
     }
 
     .stats-row {
@@ -217,7 +237,7 @@
       border: 1px solid rgba(0, 240, 255, 0.45);
       border-radius: 12px;
       padding: 16px 18px;
-      max-width: 460px;
+      max-width: 490px;
       width: 100%;
       max-height: 96%;
       overflow-y: auto;
@@ -317,28 +337,47 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 14px 8px 14px;
+      padding: 8px 14px 6px 14px;
       gap: 12px;
       width: 100%;
     }
 
-    /* Enlarged Thumb-Friendly D-Pad */
+    /* True 3x3 Cross (+) D-Pad Layout */
     .dpad-group {
       display: grid;
-      grid-template-columns: repeat(3, 64px);
-      grid-template-rows: repeat(2, 54px);
-      gap: 6px;
+      grid-template-columns: repeat(3, 56px);
+      grid-template-rows: repeat(3, 46px);
+      gap: 4px;
       flex-shrink: 0;
       touch-action: none;
+    }
+
+    .dpad-center {
+      background: rgba(0, 240, 255, 0.07);
+      border: 1.5px solid rgba(0, 240, 255, 0.25);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .dpad-center::after {
+      content: '';
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(0, 240, 255, 0.28);
+      box-shadow: 0 0 6px rgba(0, 240, 255, 0.45);
     }
 
     .touch-btn {
       background: rgba(0, 240, 255, 0.18);
       border: 2px solid rgba(0, 240, 255, 0.6);
       color: #ffffff;
-      border-radius: 12px;
+      border-radius: 10px;
       font-weight: 900;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -405,7 +444,7 @@
     /* Dedicated Bottom Safe-Area Spacer for Chrome Mobile */
     .chrome-mobile-spacer {
       width: 100%;
-      height: calc(30px + env(safe-area-inset-bottom, 0px));
+      height: calc(26px + env(safe-area-inset-bottom, 0px));
       background: linear-gradient(180deg, rgba(6, 10, 20, 0.98) 0%, #020307 100%);
       border-top: 1px solid rgba(0, 240, 255, 0.14);
       display: flex;
@@ -430,14 +469,14 @@
       .controls-grid { grid-template-columns: 1fr; }
 
       .touch-controls {
-        padding: 10px 10px 8px 10px;
+        padding: 8px 10px 6px 10px;
         gap: 10px;
       }
 
       .dpad-group {
-        grid-template-columns: repeat(3, 58px);
-        grid-template-rows: repeat(2, 52px);
-        gap: 5px;
+        grid-template-columns: repeat(3, 52px);
+        grid-template-rows: repeat(3, 44px);
+        gap: 4px;
       }
 
       .combat-buttons {
@@ -447,7 +486,7 @@
       }
 
       .combat-btn {
-        min-height: 50px;
+        min-height: 54px;
         padding: 8px 6px;
         font-size: 0.74rem;
         max-width: none;
@@ -455,11 +494,11 @@
 
       .combat-btn.force-btn {
         grid-column: span 2;
-        min-height: 46px;
+        min-height: 48px;
       }
 
       .chrome-mobile-spacer {
-        height: calc(34px + env(safe-area-inset-bottom, 0px));
+        height: calc(28px + env(safe-area-inset-bottom, 0px));
       }
     }
 
@@ -479,7 +518,7 @@
 
       .modal-card {
         padding: 8px 14px;
-        max-width: 440px;
+        max-width: 450px;
       }
       .modal-title { font-size: 1rem; margin-bottom: 2px; }
       .modal-subtitle { font-size: 0.66rem; margin-bottom: 5px; }
@@ -488,19 +527,19 @@
       .primary-cta { padding: 6px 16px; font-size: 0.76rem; }
 
       .touch-controls {
-        padding: 6px 12px 5px 12px;
+        padding: 5px 12px 4px 12px;
         gap: 10px;
       }
 
       .dpad-group {
-        grid-template-columns: repeat(3, 56px);
-        grid-template-rows: repeat(2, 42px);
-        gap: 5px;
+        grid-template-columns: repeat(3, 46px);
+        grid-template-rows: repeat(3, 34px);
+        gap: 3px;
       }
 
       .touch-btn {
-        font-size: 1.15rem;
-        border-radius: 9px;
+        font-size: 1.05rem;
+        border-radius: 8px;
       }
 
       .combat-btn {
@@ -511,7 +550,7 @@
       }
 
       .chrome-mobile-spacer {
-        height: calc(20px + env(safe-area-inset-bottom, 0px));
+        height: calc(16px + env(safe-area-inset-bottom, 0px));
       }
     }
   </style>
@@ -522,6 +561,7 @@
   <header class="hud-header">
     <div class="brand-group">
       <div class="brand-title">R-TYPE // R-9A</div>
+      <span class="gamepad-pill" id="gamepadStatus" title="USB-C / Bluetooth Controller Status">CONTROLLER: STANDBY</span>
     </div>
 
     <div class="stats-row">
@@ -558,8 +598,8 @@
     </div>
 
     <div class="toolbar-actions">
-      <button type="button" class="hud-btn" id="btnPause" title="Pause or Resume Game (P)">Pause</button>
-      <button type="button" class="hud-btn" id="btnMute" title="Toggle Synthesizer Audio (M)">Audio: ON</button>
+      <button type="button" class="hud-btn" id="btnPause" title="Pause or Resume Game (P / Start)">Pause</button>
+      <button type="button" class="hud-btn" id="btnMute" title="Toggle Synthesizer Audio (M / Select)">Audio: ON</button>
       <button type="button" class="hud-btn" id="btnHelp" title="View Tactical Briefing">Briefing</button>
       <button type="button" class="hud-btn" id="btnRestart" title="Restart Mission">Restart</button>
     </div>
@@ -578,19 +618,19 @@
         <div class="controls-grid">
           <div class="control-item">
             <strong>Flight Thrusters</strong>
-            WASD / Arrow Keys / On-Screen D-Pad
+            Controller Stick/D-Pad • WASD/Arrows • Cross D-Pad
           </div>
           <div class="control-item">
             <strong>Plasma &amp; Wave Cannon</strong>
-            Tap Space/Z for Rapid Fire; Hold to Charge Beam
+            Controller A/R1 (Rapid) • Hold X/R2 (Wave) • Space/Z
           </div>
           <div class="control-item">
             <strong>Force Pod Control</strong>
-            Press Shift / X to Detach or Recall Force Orb
+            Controller B/Y/L1 • Shift/X • Force Pod Button
           </div>
           <div class="control-item">
             <strong>Tactical Systems</strong>
-            P to Pause • M to Mute Audio
+            Controller Start/Menu (Launch/Pause) • Select (Mute)
           </div>
         </div>
 
@@ -608,13 +648,19 @@
   <!-- On-Screen Touch / Mouse Controls + Chrome Mobile Safe-Area Spacer -->
   <footer class="touch-deck-wrapper">
     <div class="touch-controls">
-      <div class="dpad-group" id="dpadGroup" aria-label="Directional Flight Pad">
+      <!-- True 3x3 Cross (+) D-Pad: Up on Row 1, Left + Center + Right on Row 2, Down on Row 3 -->
+      <div class="dpad-group" id="dpadGroup" aria-label="Directional Cross Flight Pad">
         <div></div>
         <button type="button" class="touch-btn" id="btnUp" data-dir="up" aria-label="Fly Up">▲</button>
         <div></div>
+
         <button type="button" class="touch-btn" id="btnLeft" data-dir="left" aria-label="Fly Left">◀</button>
-        <button type="button" class="touch-btn" id="btnDown" data-dir="down" aria-label="Fly Down">▼</button>
+        <div class="dpad-center" aria-hidden="true"></div>
         <button type="button" class="touch-btn" id="btnRight" data-dir="right" aria-label="Fly Right">▶</button>
+
+        <div></div>
+        <button type="button" class="touch-btn" id="btnDown" data-dir="down" aria-label="Fly Down">▼</button>
+        <div></div>
       </div>
 
       <div class="combat-buttons">
@@ -774,6 +820,7 @@
       const ctx = canvas.getContext('2d');
       const stageContainer = document.getElementById('stageContainer');
 
+      const gamepadStatus = document.getElementById('gamepadStatus');
       const hudScore = document.getElementById('hudScore');
       const hudHigh = document.getElementById('hudHigh');
       const hudStage = document.getElementById('hudStage');
@@ -817,7 +864,7 @@
       }
 
       /* =========================================================================
-       * 3. GAME STATE & CONFIGURATION
+       * 3. GAME STATE, INPUT SOURCES & HARDWARE GAMEPAD SUPPORT
        * ========================================================================= */
       const LOGICAL_WIDTH = 960;
       const LOGICAL_HEIGHT = 540;
@@ -825,13 +872,23 @@
       let animFrameId = null;
       let lastTimestamp = 0;
 
-      const keys = {
+      // Separate input channels so keyboard, touch, and wired controller never overwrite each other
+      const kbInput = { up: false, down: false, left: false, right: false, shoot: false, rapidHold: false };
+      const touchInput = { up: false, down: false, left: false, right: false, shoot: false, rapidHold: false };
+      const gpInput = {
+        connected: false,
         up: false,
         down: false,
         left: false,
         right: false,
+        axisX: 0,
+        axisY: 0,
         shoot: false,
-        rapidHold: false
+        rapidHold: false,
+        prevForce: false,
+        prevStart: false,
+        prevSelect: false,
+        prevConfirm: false
       };
 
       const state = {
@@ -982,11 +1039,150 @@
         updateHUD();
         missionModal.classList.add('hidden');
         btnPause.textContent = 'Pause';
+        btnPause.classList.remove('active-mode');
       }
 
       /* =========================================================================
-       * 5. HUD & CHROME MOBILE VIEWPORT / RESIZE HANDLING
+       * 5. HUD, GAMEPAD POLLING (ELO VAGABOND / XINPUT) & VIEWPORT HANDLING
        * ========================================================================= */
+      function setGamepadBadge(connected, idText) {
+        if (connected !== gpInput.connected) {
+          gpInput.connected = connected;
+          if (connected) {
+            const shortName = idText && idText.toLowerCase().includes('vagabond')
+              ? 'ELO VAGABOND: READY'
+              : 'CONTROLLER: READY';
+            gamepadStatus.textContent = shortName;
+            gamepadStatus.classList.add('connected');
+          } else {
+            gamepadStatus.textContent = 'CONTROLLER: STANDBY';
+            gamepadStatus.classList.remove('connected');
+          }
+        }
+      }
+
+      window.addEventListener('gamepadconnected', (e) => {
+        setGamepadBadge(true, e.gamepad ? e.gamepad.id : '');
+      });
+
+      window.addEventListener('gamepaddisconnected', () => {
+        setGamepadBadge(false, '');
+      });
+
+      function isBtnPressed(buttons, idx) {
+        const b = buttons && buttons[idx];
+        if (!b) return false;
+        return typeof b === 'object' ? b.pressed || b.value > 0.35 : b > 0.35;
+      }
+
+      function pollGamepad() {
+        if (!navigator.getGamepads) return;
+        let pads = null;
+        try {
+          pads = navigator.getGamepads();
+        } catch (e) {
+          return;
+        }
+        if (!pads) return;
+
+        let activePad = null;
+        for (let i = 0; i < pads.length; i++) {
+          if (pads[i] && pads[i].connected) {
+            activePad = pads[i];
+            break;
+          }
+        }
+
+        if (!activePad) {
+          setGamepadBadge(false, '');
+          gpInput.up = false;
+          gpInput.down = false;
+          gpInput.left = false;
+          gpInput.right = false;
+          gpInput.axisX = 0;
+          gpInput.axisY = 0;
+          gpInput.shoot = false;
+          gpInput.rapidHold = false;
+          return;
+        }
+
+        setGamepadBadge(true, activePad.id || '');
+
+        const btns = activePad.buttons || [];
+        const axes = activePad.axes || [];
+        const DEADZONE = 0.22;
+
+        // Analog Stick (Left Stick axes[0], axes[1]) + D-Pad Axis Fallbacks (axes[6], axes[7])
+        let axX = axes[0] || 0;
+        let axY = axes[1] || 0;
+        if (Math.abs(axX) < DEADZONE && Math.abs(axes[6] || 0) > 0.4) axX = axes[6];
+        if (Math.abs(axY) < DEADZONE && Math.abs(axes[7] || 0) > 0.4) axY = axes[7];
+
+        gpInput.axisX = Math.abs(axX) >= DEADZONE ? axX : 0;
+        gpInput.axisY = Math.abs(axY) >= DEADZONE ? axY : 0;
+
+        // D-Pad Buttons (Standard mapping: 12=Up, 13=Down, 14=Left, 15=Right)
+        gpInput.up = isBtnPressed(btns, 12) || gpInput.axisY < -0.35;
+        gpInput.down = isBtnPressed(btns, 13) || gpInput.axisY > 0.35;
+        gpInput.left = isBtnPressed(btns, 14) || gpInput.axisX < -0.35;
+        gpInput.right = isBtnPressed(btns, 15) || gpInput.axisX > 0.35;
+
+        // Combat Buttons on ELO Vagabond / Standard Controller:
+        // Rapid Fire: A (0) or R1/RB (5)
+        const rapidNow = isBtnPressed(btns, 0) || isBtnPressed(btns, 5);
+        // Wave Cannon Charge: X (2) or R2/RT (7) or L2/LT (6)
+        const waveNow = isBtnPressed(btns, 2) || isBtnPressed(btns, 7) || isBtnPressed(btns, 6);
+        // Force Pod Attach/Detach: B (1) or Y (3) or L1/LB (4)
+        const forceNow = isBtnPressed(btns, 1) || isBtnPressed(btns, 3) || isBtnPressed(btns, 4);
+        // Start / Menu (9) & Select / Back (8)
+        const startNow = isBtnPressed(btns, 9);
+        const selectNow = isBtnPressed(btns, 8);
+
+        if (rapidNow || waveNow || forceNow || startNow || selectNow) {
+          SoundFX.init();
+        }
+
+        const modalOpen = !missionModal.classList.contains('hidden');
+        if (modalOpen) {
+          // Allow A (0) or Start (9) to launch or resume mission directly from controller
+          const confirmNow = isBtnPressed(btns, 0) || startNow;
+          if (confirmNow && !gpInput.prevConfirm) {
+            btnLaunchMission.click();
+          }
+          gpInput.prevConfirm = confirmNow;
+          gpInput.prevStart = startNow;
+          gpInput.rapidHold = false;
+          gpInput.shoot = false;
+        } else {
+          gpInput.prevConfirm = isBtnPressed(btns, 0) || startNow;
+          gpInput.rapidHold = rapidNow;
+          gpInput.shoot = waveNow;
+
+          if (forceNow && !gpInput.prevForce) {
+            toggleForcePod();
+          }
+          if (startNow && !gpInput.prevStart) {
+            togglePause();
+          }
+        }
+
+        if (selectNow && !gpInput.prevSelect) {
+          toggleMute();
+        }
+
+        gpInput.prevForce = forceNow;
+        gpInput.prevStart = startNow;
+        gpInput.prevSelect = selectNow;
+
+        // Visual feedback on the on-screen Cross D-Pad & combat buttons
+        btnUp.classList.toggle('pressed', touchInput.up || kbInput.up || gpInput.up);
+        btnDown.classList.toggle('pressed', touchInput.down || kbInput.down || gpInput.down);
+        btnLeft.classList.toggle('pressed', touchInput.left || kbInput.left || gpInput.left);
+        btnRight.classList.toggle('pressed', touchInput.right || kbInput.right || gpInput.right);
+        btnRapidFire.classList.toggle('pressed', touchInput.rapidHold || kbInput.rapidHold || gpInput.rapidHold);
+        btnWaveCharge.classList.toggle('pressed', touchInput.shoot || kbInput.shoot || gpInput.shoot);
+      }
+
       function updateHUD() {
         hudScore.textContent = String(state.score).padStart(6, '0');
         hudHigh.textContent = String(state.highScore).padStart(6, '0');
@@ -1104,7 +1300,6 @@
           const fy = forcePod.y;
 
           if (player.weaponColor === 'red') {
-            // Counter-Air Dual Sine/Phase Laser
             playerBullets.push({
               type: 'red_laser',
               x: fx,
@@ -1134,7 +1329,6 @@
               color: '#ff2a5f'
             });
           } else if (player.weaponColor === 'blue') {
-            // Reflect Diagonal Beams (bounces off terrain walls)
             const angles = [-0.42, 0, 0.42];
             angles.forEach((ang) => {
               playerBullets.push({
@@ -1152,7 +1346,6 @@
               });
             });
           } else if (player.weaponColor === 'yellow') {
-            // Counter-Ground Wall Hugging Plasma
             playerBullets.push({
               type: 'yellow_ground',
               x: fx,
@@ -1178,7 +1371,6 @@
               color: '#ffd166'
             });
           } else {
-            // Detached or attached standard twin blasters
             playerBullets.push({
               type: 'plasma',
               x: fx,
@@ -1282,7 +1474,6 @@
 
         const roll = Math.random();
         if (roll < 0.38) {
-          // Pata-Pata Sine Squadron (4 flyers)
           const baseY = 130 + Math.random() * (LOGICAL_HEIGHT - 260);
           for (let i = 0; i < 4; i++) {
             enemies.push({
@@ -1301,7 +1492,6 @@
             });
           }
         } else if (roll < 0.62) {
-          // Pow Armor Carrier (Drops R-Type Force Crystals!)
           const bounds = getTerrainBoundsAt(LOGICAL_WIDTH - 20);
           const midY = (bounds.top + bounds.bottom) * 0.5 + (Math.random() * 120 - 60);
           enemies.push({
@@ -1318,7 +1508,6 @@
             scoreValue: 300
           });
         } else if (roll < 0.84) {
-          // Biomechanical Turret mounted on ceiling or floor
           const onCeiling = Math.random() > 0.5;
           const bounds = getTerrainBoundsAt(LOGICAL_WIDTH);
           enemies.push({
@@ -1336,7 +1525,6 @@
             scoreValue: 250
           });
         } else {
-          // Armored Bydo Dread-Cruiser (Mid-size heavy unit)
           const yPos = 150 + Math.random() * (LOGICAL_HEIGHT - 300);
           enemies.push({
             kind: 'cruiser',
@@ -1453,16 +1641,31 @@
           terrainSegments.push(generateTerrainColumn(last.x + last.w));
         }
 
-        // Player movement
+        // Combine Keyboard, On-Screen Cross D-Pad, and Wired Controller (Stick + D-Pad)
         let dx = 0;
         let dy = 0;
-        if (keys.left) dx -= 1;
-        if (keys.right) dx += 1;
-        if (keys.up) dy -= 1;
-        if (keys.down) dy += 1;
-        if (dx !== 0 && dy !== 0) {
-          dx *= 0.7071;
-          dy *= 0.7071;
+        const moveLeft = kbInput.left || touchInput.left || gpInput.left;
+        const moveRight = kbInput.right || touchInput.right || gpInput.right;
+        const moveUp = kbInput.up || touchInput.up || gpInput.up;
+        const moveDown = kbInput.down || touchInput.down || gpInput.down;
+
+        if (Math.abs(gpInput.axisX) > 0 || Math.abs(gpInput.axisY) > 0) {
+          dx = gpInput.axisX;
+          dy = gpInput.axisY;
+          const mag = Math.hypot(dx, dy);
+          if (mag > 1) {
+            dx /= mag;
+            dy /= mag;
+          }
+        } else {
+          if (moveLeft) dx -= 1;
+          if (moveRight) dx += 1;
+          if (moveUp) dy -= 1;
+          if (moveDown) dy += 1;
+          if (dx !== 0 && dy !== 0) {
+            dx *= 0.7071;
+            dy *= 0.7071;
+          }
         }
 
         player.x += dx * player.speed * dt;
@@ -1483,13 +1686,16 @@
           player.missileCooldown = Math.max(0, player.missileCooldown - dt);
         }
 
-        // Weapon Firing & Wave Cannon Charge
-        if (keys.rapidHold && player.shootCooldown <= 0) {
+        // Combined Weapon Firing & Wave Cannon Charge
+        const isRapidHeld = kbInput.rapidHold || touchInput.rapidHold || gpInput.rapidHold;
+        const isWaveHeld = kbInput.shoot || touchInput.shoot || gpInput.shoot;
+
+        if (isRapidHeld && player.shootCooldown <= 0) {
           fireRapidShot();
           player.shootCooldown = 0.14;
         }
 
-        if (keys.shoot) {
+        if (isWaveHeld) {
           if (player.charge === 0 && player.shootCooldown <= 0) {
             fireRapidShot();
             player.shootCooldown = 0.16;
@@ -1711,7 +1917,6 @@
             }
             spawnParticles(e.x, e.y, '#ff5e00', e.kind === 'cruiser' ? 28 : 14, 1.1);
 
-            // Drop Powerup Crystal if Pow Armor or Cruiser
             if (e.kind === 'pow_armor' || (e.kind === 'cruiser' && Math.random() < 0.65)) {
               const types = ['red', 'blue', 'yellow', 'bit'];
               const pick = types[Math.floor(Math.random() * types.length)];
@@ -1809,7 +2014,6 @@
           eb.x += eb.vx * dt;
           eb.y += eb.vy * dt;
 
-          // Blocked by indestructible Force Pod!
           if (forcePod.active) {
             const distToForce = Math.hypot(eb.x - forcePod.x, eb.y - forcePod.y);
             if (distToForce < forcePod.radius + eb.r + 3) {
@@ -1819,7 +2023,6 @@
             }
           }
 
-          // Hit player
           if (
             Math.abs(eb.x - player.x) < player.w * 0.36 &&
             Math.abs(eb.y - player.y) < player.h * 0.38
@@ -1914,13 +2117,11 @@
         for (let i = 0; i < terrainSegments.length; i++) {
           const seg = terrainSegments[i];
 
-          // Top Bio-Hull
           ctx.fillStyle = '#121d38';
           ctx.fillRect(seg.x, 0, seg.w + 1, seg.topH);
           ctx.fillStyle = '#1e335c';
           ctx.fillRect(seg.x, seg.topH - 8, seg.w + 1, 8);
 
-          // Bottom Bio-Hull
           const botY = LOGICAL_HEIGHT - seg.botH;
           ctx.fillStyle = '#121d38';
           ctx.fillRect(seg.x, botY, seg.w + 1, seg.botH);
@@ -1970,7 +2171,6 @@
             ctx.save();
             ctx.translate(player.x, player.y);
 
-            // Thruster flame
             const flameLen = 14 + Math.random() * 12;
             ctx.fillStyle = '#00f0ff';
             ctx.beginPath();
@@ -1980,7 +2180,6 @@
             ctx.closePath();
             ctx.fill();
 
-            // R-9 Hull Body
             ctx.fillStyle = '#dbeafe';
             ctx.beginPath();
             ctx.moveTo(24, 2);
@@ -1991,18 +2190,15 @@
             ctx.closePath();
             ctx.fill();
 
-            // Red Wing Trim
             ctx.fillStyle = '#ff2a5f';
             ctx.fillRect(-16, -9, 14, 4);
             ctx.fillRect(-14, 5, 16, 4);
 
-            // Glass Canopy
             ctx.fillStyle = '#00f0ff';
             ctx.beginPath();
             ctx.ellipse(4, -2, 9, 4, 0.1, 0, Math.PI * 2);
             ctx.fill();
 
-            // Wave Cannon Charging Halo
             if (player.charge > 0.08) {
               const rRatio = Math.min(1, player.charge / player.maxCharge);
               ctx.strokeStyle = rRatio > 0.85 ? '#ffea00' : '#00f0ff';
@@ -2015,7 +2211,6 @@
             ctx.restore();
           }
 
-          // Orbiting Bit Devices
           if (player.bitsCount >= 1) {
             ctx.fillStyle = '#70ffdf';
             ctx.beginPath();
@@ -2035,7 +2230,6 @@
           ctx.save();
           ctx.translate(forcePod.x, forcePod.y);
 
-          // Outer biomechanical rotating prongs
           ctx.strokeStyle = '#ffae00';
           ctx.lineWidth = 3;
           for (let k = 0; k < 4; k++) {
@@ -2045,7 +2239,6 @@
             ctx.stroke();
           }
 
-          // Glowing Energy Core
           const coreGrad = ctx.createRadialGradient(0, 0, 2, 0, 0, forcePod.radius);
           coreGrad.addColorStop(0, '#ffffff');
           coreGrad.addColorStop(0.5, '#ffae00');
@@ -2134,7 +2327,6 @@
           ctx.save();
           ctx.translate(boss.x, boss.y);
 
-          // Biomechanical Carapace
           ctx.fillStyle = '#2b193d';
           ctx.strokeStyle = '#ff2a5f';
           ctx.lineWidth = 3;
@@ -2143,7 +2335,6 @@
           ctx.fill();
           ctx.stroke();
 
-          // Articulated Bio-Tentacles
           for (let t = -1; t <= 1; t += 2) {
             for (let seg = 0; seg < 6; seg++) {
               const tx = -20 - seg * 20;
@@ -2155,7 +2346,6 @@
             }
           }
 
-          // Glowing Vulnerable Inner Core
           const pulse = 22 + Math.sin(boss.tentaclePhase * 2) * 5;
           const bGrad = ctx.createRadialGradient(-20, 0, 4, -20, 0, pulse);
           bGrad.addColorStop(0, '#ffffff');
@@ -2168,7 +2358,6 @@
 
           ctx.restore();
 
-          // Boss HP Overlay Bar
           const barW = 360;
           const barX = (LOGICAL_WIDTH - barW) * 0.5;
           ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -2222,6 +2411,7 @@
         const dt = Math.min(0.05, (timestamp - lastTimestamp) / 1000);
         lastTimestamp = timestamp;
 
+        pollGamepad();
         updateGame(dt);
         renderScene();
 
@@ -2233,13 +2423,13 @@
         if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(e.code)) {
           e.preventDefault();
         }
-        if (e.code === 'ArrowUp' || e.code === 'KeyW') keys.up = true;
-        if (e.code === 'ArrowDown' || e.code === 'KeyS') keys.down = true;
-        if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.left = true;
-        if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.right = true;
+        if (e.code === 'ArrowUp' || e.code === 'KeyW') kbInput.up = true;
+        if (e.code === 'ArrowDown' || e.code === 'KeyS') kbInput.down = true;
+        if (e.code === 'ArrowLeft' || e.code === 'KeyA') kbInput.left = true;
+        if (e.code === 'ArrowRight' || e.code === 'KeyD') kbInput.right = true;
         if (e.code === 'Space' || e.code === 'KeyZ' || e.code === 'KeyJ') {
           SoundFX.init();
-          keys.shoot = true;
+          kbInput.shoot = true;
         }
         if (e.code === 'ShiftLeft' || e.code === 'ShiftRight' || e.code === 'KeyX' || e.code === 'KeyK') {
           toggleForcePod();
@@ -2253,11 +2443,11 @@
       });
 
       window.addEventListener('keyup', (e) => {
-        if (e.code === 'ArrowUp' || e.code === 'KeyW') keys.up = false;
-        if (e.code === 'ArrowDown' || e.code === 'KeyS') keys.down = false;
-        if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.left = false;
-        if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.right = false;
-        if (e.code === 'Space' || e.code === 'KeyZ' || e.code === 'KeyJ') keys.shoot = false;
+        if (e.code === 'ArrowUp' || e.code === 'KeyW') kbInput.up = false;
+        if (e.code === 'ArrowDown' || e.code === 'KeyS') kbInput.down = false;
+        if (e.code === 'ArrowLeft' || e.code === 'KeyA') kbInput.left = false;
+        if (e.code === 'ArrowRight' || e.code === 'KeyD') kbInput.right = false;
+        if (e.code === 'Space' || e.code === 'KeyZ' || e.code === 'KeyJ') kbInput.shoot = false;
       });
 
       // Touch / Mouse Hold Helper
@@ -2281,12 +2471,12 @@
         btn.addEventListener('touchcancel', end, { passive: false });
       }
 
-      bindHoldButton(btnUp, () => { keys.up = true; }, () => { keys.up = false; });
-      bindHoldButton(btnDown, () => { keys.down = true; }, () => { keys.down = false; });
-      bindHoldButton(btnLeft, () => { keys.left = true; }, () => { keys.left = false; });
-      bindHoldButton(btnRight, () => { keys.right = true; }, () => { keys.right = false; });
+      bindHoldButton(btnUp, () => { touchInput.up = true; }, () => { touchInput.up = false; });
+      bindHoldButton(btnDown, () => { touchInput.down = true; }, () => { touchInput.down = false; });
+      bindHoldButton(btnLeft, () => { touchInput.left = true; }, () => { touchInput.left = false; });
+      bindHoldButton(btnRight, () => { touchInput.right = true; }, () => { touchInput.right = false; });
 
-      // Multi-direction thumb-slide support across the D-Pad container
+      // Multi-direction thumb-slide support across the Cross D-Pad container
       const dpadButtons = [
         { el: btnUp, key: 'up' },
         { el: btnDown, key: 'down' },
@@ -2305,7 +2495,7 @@
           }
         }
         dpadButtons.forEach((item) => {
-          keys[item.key] = activeDirs[item.key];
+          touchInput[item.key] = activeDirs[item.key];
           item.el.classList.toggle('pressed', activeDirs[item.key]);
         });
       }
@@ -2317,14 +2507,14 @@
 
       bindHoldButton(
         btnRapidFire,
-        () => { keys.rapidHold = true; },
-        () => { keys.rapidHold = false; }
+        () => { touchInput.rapidHold = true; },
+        () => { touchInput.rapidHold = false; }
       );
 
       bindHoldButton(
         btnWaveCharge,
-        () => { keys.shoot = true; },
-        () => { keys.shoot = false; }
+        () => { touchInput.shoot = true; },
+        () => { touchInput.shoot = false; }
       );
 
       btnForceToggle.addEventListener('click', () => {
