@@ -65,47 +65,24 @@
     <h2>AI Art Gallery</h2>
     <p>Step into Timeless Droid’s visual dimension – an AI-driven art gallery where fantasy and futurism collide. Each image here is a page from the story, dreamed up by G. Droid’s neural imagination and guided by Rick’s artistic vision. You’ll encounter neon deities, cosmic landscapes, and ancient legends reimagined in digital paint. These artworks aren’t just illustrations; they’re portals. They invite you to see the music and hear the visuals – to experience the Timeless Droid universe with all senses engaged.</p>
     <p>In this gallery, technology becomes the paintbrush. The AI art pieces evolve from a mix of Rick’s prompts, mythic lore, and the machine’s own creative leaps. Enjoy wandering through these scenes – and keep an eye out for new additions as the gallery grows with each chapter of the Timeless Droid saga.</p>
+    <p id="gallery-status" class="gallery-caption">Loading gallery transmissions...</p>
     
     <!-- Square Images -->
     <section class="thumb-section">
       <h3>Square Format (1:1)</h3>
-      <div class="gallery-thumbs">
-        <a href="assets/img/gallery/square1.jpg" target="_blank" rel="noopener">
-          <img class="img-square" src="assets/img/gallery/square1.jpg" alt="AI neon deity under cyberpunk sky" loading="lazy" />
-        </a>
-        <a href="assets/img/gallery/square2.jpg" target="_blank" rel="noopener">
-          <img class="img-square" src="assets/img/gallery/square2.jpg" alt="Ancient robot guardian portrait" loading="lazy" />
-        </a>
-        <!-- Add more images as needed -->
-      </div>
+      <div id="gallery-square" class="gallery-thumbs"></div>
     </section>
 
     <!-- Portrait Images -->
     <section class="thumb-section">
       <h3>Portrait Format (9:16)</h3>
-      <div class="gallery-thumbs">
-        <a href="assets/img/gallery/portrait1.jpg" target="_blank" rel="noopener">
-          <img class="img-portrait" src="assets/img/gallery/portrait1.jpg" alt="AI oracle in electric mist" loading="lazy" />
-        </a>
-        <a href="assets/img/gallery/portrait2.jpg" target="_blank" rel="noopener">
-          <img class="img-portrait" src="assets/img/gallery/portrait2.jpg" alt="Futuristic city watcher" loading="lazy" />
-        </a>
-        <!-- Add more images as needed -->
-      </div>
+      <div id="gallery-portrait" class="gallery-thumbs"></div>
     </section>
 
     <!-- Landscape Images -->
     <section class="thumb-section">
       <h3>Landscape Format (16:9)</h3>
-      <div class="gallery-thumbs">
-        <a href="assets/img/gallery/landscape1.jpg" target="_blank" rel="noopener">
-          <img class="img-landscape" src="assets/img/gallery/landscape1.jpg" alt="Cosmic robot explorer in ruins" loading="lazy" />
-        </a>
-        <a href="assets/img/gallery/landscape2.jpg" target="_blank" rel="noopener">
-          <img class="img-landscape" src="assets/img/gallery/landscape2.jpg" alt="Synthwave-inspired desert vista" loading="lazy" />
-        </a>
-        <!-- Add more images as needed -->
-      </div>
+      <div id="gallery-landscape" class="gallery-thumbs"></div>
     </section>
   </section>
 </main>
@@ -134,6 +111,140 @@
     </section>
   </footer>
   <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      const OWNER = 'astrodroids';
+      const REPO = 'timelessdroid';
+      const GALLERY_PATH = 'assets/img/gallery';
+      const API_URL = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${GALLERY_PATH}`;
+      const CACHE_KEY = 'td_gallery_files_v1';
+      const CACHE_TTL_MS = 5 * 60 * 1000;
+
+      const FALLBACK_FILES = [
+        'g-profile.jpg',
+        'landscape1.jpg',
+        'landscape2.jpg',
+        'landscape3.jpg',
+        'portrait1.jpg',
+        'portrait2.jpg',
+        'square-agent.jpg',
+        'square1.jpg',
+        'square2.jpg',
+        'square3.jpg',
+        'thumb1.jpg',
+        'thumb2.jpg',
+        'thumb3.jpg',
+        'thumb4.jpg',
+        'timeless-droid-album.jpg'
+      ];
+
+      const IMAGE_EXT_RE = /\.(jpe?g|png|webp|gif)$/i;
+
+      const squareGrid = document.getElementById('gallery-square');
+      const portraitGrid = document.getElementById('gallery-portrait');
+      const landscapeGrid = document.getElementById('gallery-landscape');
+      const statusEl = document.getElementById('gallery-status');
+
+      function formatAltText(filename) {
+        const clean = filename.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim();
+        return `Timeless Droid AI Art – ${clean}`;
+      }
+
+      function addImageToGrid(filename) {
+        const src = `${GALLERY_PATH}/${encodeURIComponent(filename)}`;
+        const probe = new Image();
+
+        probe.onload = function () {
+          const w = probe.naturalWidth;
+          const h = probe.naturalHeight;
+          const ratio = h > 0 ? w / h : 1;
+
+          let targetGrid = squareGrid;
+          let aspectClass = 'img-square';
+
+          if (ratio > 1.2) {
+            targetGrid = landscapeGrid;
+            aspectClass = 'img-landscape';
+          } else if (ratio < 0.85) {
+            targetGrid = portraitGrid;
+            aspectClass = 'img-portrait';
+          }
+
+          const link = document.createElement('a');
+          link.href = src;
+          link.target = '_blank';
+          link.rel = 'noopener';
+
+          const img = document.createElement('img');
+          img.className = aspectClass;
+          img.src = src;
+          img.alt = formatAltText(filename);
+          img.loading = 'lazy';
+
+          link.appendChild(img);
+          targetGrid.appendChild(link);
+        };
+
+        probe.src = src;
+      }
+
+      async function fetchGalleryFilenames() {
+        try {
+          const cachedRaw = sessionStorage.getItem(CACHE_KEY);
+          if (cachedRaw) {
+            const cached = JSON.parse(cachedRaw);
+            if (cached && Array.isArray(cached.files) && (Date.now() - cached.ts < CACHE_TTL_MS)) {
+              return cached.files;
+            }
+          }
+        } catch (e) {
+          // Ignore sessionStorage errors
+        }
+
+        const response = await fetch(API_URL, {
+          headers: { 'Accept': 'application/vnd.github.v3+json' }
+        });
+
+        if (!response.ok) {
+          throw new Error(`GitHub API returned ${response.status}`);
+        }
+
+        const items = await response.json();
+        const files = items
+          .filter(item => item.type === 'file' && IMAGE_EXT_RE.test(item.name))
+          .map(item => item.name)
+          .sort((a, b) => a.localeCompare(b));
+
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), files }));
+        } catch (e) {
+          // Ignore sessionStorage errors
+        }
+
+        return files;
+      }
+
+      async function initGallery() {
+        let files = [];
+        try {
+          files = await fetchGalleryFilenames();
+          if (statusEl) statusEl.textContent = '';
+        } catch (err) {
+          console.warn('Gallery API lookup failed, using fallback list:', err);
+          files = FALLBACK_FILES;
+          if (statusEl) statusEl.textContent = '';
+        }
+
+        if (!files.length) {
+          if (statusEl) statusEl.textContent = 'No gallery images found.';
+          return;
+        }
+
+        files.forEach(addImageToGrid);
+      }
+
+      document.addEventListener('DOMContentLoaded', initGallery);
+    })();
+  </script>
 </body>
 </html>
-
