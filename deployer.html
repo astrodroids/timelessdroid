@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timeless Droid Deployer</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0d1117; color: #c9d1d9; padding: 16px; max-width: 600px; margin: auto; }
+    h2 { color: #00e5ff; margin-top: 0; letter-spacing: 0.5px; }
+    label { display: block; margin-top: 12px; font-weight: bold; font-size: 14px; color: #8b949e; }
+    input, select, textarea, button { width: 100%; box-sizing: border-box; margin-top: 6px; padding: 10px; border-radius: 6px; border: 1px solid #30363d; background: #161b22; color: #c9d1d9; font-size: 14px; }
+    textarea { height: 220px; font-family: monospace; }
+    button { background: #238636; color: #fff; font-weight: bold; border: none; cursor: pointer; margin-top: 16px; padding: 12px; font-size: 15px; }
+    button.secondary { background: #21262d; border: 1px solid #30363d; margin-top: 8px; }
+    button.cyan { background: #007799; border: 1px solid #00e5ff; margin-top: 8px; }
+    .row { display: flex; gap: 8px; }
+    .row button { flex: 1; }
+    #status { margin-top: 14px; padding: 10px; border-radius: 6px; display: none; font-size: 14px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h2>🚀 Timeless Droid Deployer</h2>
+  
+  <label>GitHub Token (Saved locally on your Pixel)</label>
+  <input type="password" id="token" placeholder="Paste github_pat_... here">
+  
+  <label>Quick-Select Site File</label>
+  <select id="quickselect" onchange="document.getElementById('filepath').value = this.value">
+    <option value="index.html">index.html</option>
+    <option value="about.html">about.html</option>
+    <option value="factory.html">factory.html</option>
+    <option value="gallery.html">gallery.html</option>
+    <option value="music.html">music.html</option>
+    <option value="play.html">play.html</option>
+    <option value="videos.html">videos.html</option>
+    <option value="assets/css/style.css">assets/css/style.css</option>
+    <option value="assets/js/main.js">assets/js/main.js</option>
+  </select>
+
+  <label>File Path in astrodroids/timelessdroid</label>
+  <input type="text" id="filepath" value="index.html">
+  
+  <div class="row">
+    <button class="secondary" onclick="fetchCurrentFile()">📥 Load Single File</button>
+    <button class="cyan" onclick="downloadAllCodeFile()">💾 Save Bundle (.txt)</button>
+  </div>
+
+  <label>File Content (HTML / CSS / JS)</label>
+  <textarea id="content" placeholder="Paste updated code from Gemini here..."></textarea>
+  <button class="secondary" onclick="copyContent()">📋 Copy Textbox to Clipboard</button>
+
+  <label>Commit Message</label>
+  <input type="text" id="message" value="Update via Timeless Droid Deployer">
+
+  <button onclick="pushToGitHub()">⚡ Push to Live Site</button>
+  <div id="status"></div>
+
+  <script>
+    const REPO = "astrodroids/timelessdroid";
+    const CORE_FILES = [
+      "index.html",
+      "about.html",
+      "factory.html",
+      "gallery.html",
+      "music.html",
+      "play.html",
+      "videos.html",
+      "assets/css/style.css",
+      "assets/js/main.js"
+    ];
+
+    const tokenInput = document.getElementById("token");
+    tokenInput.value = localStorage.getItem("td_gh_token") || "";
+    tokenInput.addEventListener("input", () => localStorage.setItem("td_gh_token", tokenInput.value.trim()));
+
+    function showStatus(msg, isError = false) {
+      const el = document.getElementById("status");
+      el.style.display = "block";
+      el.style.background = isError ? "#3d1c1e" : "#122d1f";
+      el.style.border = isError ? "1px solid #f85149" : "1px solid #2ea043";
+      el.textContent = msg;
+    }
+
+    function decodeBase64UTF8(b64) {
+      const bytes = Uint8Array.from(atob(b64.replace(/\n/g, "")), c => c.charCodeAt(0));
+      return new TextDecoder().decode(bytes);
+    }
+
+    async function fetchCurrentFile() {
+      const token = tokenInput.value.trim();
+      const path = document.getElementById("filepath").value.trim();
+      if (!token) return showStatus("Please paste your GitHub token first.", true);
+      showStatus("Fetching " + path + "...");
+      try {
+        const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+          headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github+json" }
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}: ${(await res.json()).message}`);
+        const data = await res.json();
+        document.getElementById("content").value = decodeBase64UTF8(data.content);
+        showStatus("Loaded " + path + " successfully!");
+      } catch (err) {
+        showStatus("Error: " + err.message, true);
+      }
+    }
+
+    async function downloadAllCodeFile() {
+      const token = tokenInput.value.trim();
+      if (!token) return showStatus("Please paste your GitHub token first.", true);
+      showStatus("Fetching all 9 core code files from GitHub...");
+      try {
+        let bundle = "";
+        for (const path of CORE_FILES) {
+          const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+            headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github+json" }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            bundle += `=== FILE: ${path} ===\n` + decodeBase64UTF8(data.content) + "\n\n";
+          }
+        }
+        const blob = new Blob([bundle], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "timelessdroid-bundle.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showStatus("✅ Downloaded timelessdroid-bundle.txt! Tap the '+' button in Gemini chat to attach it.");
+      } catch (err) {
+        showStatus("Error bundling files: " + err.message, true);
+      }
+    }
+
+    async function copyContent() {
+      const val = document.getElementById("content").value;
+      if (!val) return showStatus("Textbox is empty.", true);
+      await navigator.clipboard.writeText(val);
+      showStatus("📋 Copied textbox content to clipboard!");
+    }
+
+    async function pushToGitHub() {
+      const token = tokenInput.value.trim();
+      const path = document.getElementById("filepath").value.trim();
+      const content = document.getElementById("content").value;
+      const message = document.getElementById("message").value.trim() || "Update " + path;
+      if (!token || !path || !content) return showStatus("Token, file path, and content are required.", true);
+      if (content.startsWith("=== FILE:")) return showStatus("Hold on! You have the multi-file bundle in the textbox. Load or paste a single file before pushing.", true);
+
+      showStatus("Pushing " + path + " to GitHub...");
+      try {
+        let sha = undefined;
+        const getRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+          headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github+json" }
+        });
+        if (getRes.ok) {
+          const getData = await getRes.json();
+          sha = getData.sha;
+        }
+
+        const bytes = new TextEncoder().encode(content);
+        let binary = "";
+        bytes.forEach(b => binary += String.fromCharCode(b));
+        const base64Content = btoa(binary);
+
+        const putRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+          method: "PUT",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/vnd.github+json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ message, content: base64Content, ...(sha ? { sha } : {}) })
+        });
+        if (!putRes.ok) throw new Error(`HTTP ${putRes.status}: ${(await putRes.json()).message}`);
+        showStatus("✅ Successfully pushed " + path + " to live site!");
+      } catch (err) {
+        showStatus("❌ Push failed: " + err.message, true);
+      }
+    }
+  </script>
+</body>
+</html>
+
